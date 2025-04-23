@@ -1,0 +1,34 @@
+<section class="welcome-section">
+    <img [src]="welcomeSectionImages[indexOfImage]" alt="backgroundImage">
+    <article>
+        <span>Best Prices</span>
+        <h2>Incredible Prices on All Your Favorite Items</h2>
+        <p>Get more for less on selected brands</p>
+        <button>Shop Now <i class="fa-solid fa-basket-shopping"></i></button>
+    </article>
+</section>
+
+<section class="best-sellers-title">
+    <h4>Best Sellers</h4>
+</section>
+<section class="best-sellers">
+    @for (product of bestSellers; track $index) {
+        <div class="card">
+            <div class="image-container">
+              <img [src]="product.thumbnail" alt="Modern Laptop">
+            </div>
+           <div class="content">
+                <article>
+                    <p>{{product.price.current}}$<span>{{product.price.beforeDiscount == product.price.current ? "": `${product.price.beforeDiscount}$`}}</span></p>
+                    <h2>{{product.title}}</h2>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <button>ADD TO CART <i class="fa-solid fa-cart-shopping"></i></button>
+                </article>
+           </div>
+        </div>
+    }
+</section>
