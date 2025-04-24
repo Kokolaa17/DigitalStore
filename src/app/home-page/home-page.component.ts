@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { APIconnectionService } from '../apiconnection.service';
+import { HomePageChildComponent } from "./home-page-child/home-page-child.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [HomePageChildComponent, RouterModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -34,7 +36,7 @@ export class HomePageComponent {
 
   getBestSellers(){
     this.https.getBestSellers().subscribe({
-      next: (data:any) => this.bestSellers = data.products,
+      next: (data:any) => {this.bestSellers = data.products},
       error: (error) => console.log(error),
     })
   }

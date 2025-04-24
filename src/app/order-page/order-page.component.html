@@ -1,0 +1,42 @@
+<section class="page-indicator"> 
+    <p routerLink="">Home</p>
+    <i class="fa-solid fa-greater-than fa-beat"></i>
+    <p routerLinkActive="active" routerLink="/orderPage">Order page <i class="fa-solid fa-cart-shopping"></i></p>
+</section>
+
+<section class="order-page-container">
+    <aside>
+        <h2>Browse by</h2>
+        <h3>Category</h3>
+        <h3>Brand</h3>
+        <h3>Rating</h3>
+        <h3>Price</h3>
+    </aside>
+    
+    <main>
+        <section class="products">
+            @for (product of displayProducts; track $index) {
+                <div class="card">
+                    <div class="image-container">
+                      <img [src]="product.thumbnail" alt="Modern Laptop">
+                    </div>
+                   <div class="content">
+                        <article>
+                            <p>{{product.price.current}}$<span>{{product.price.beforeDiscount == product.price.current ? "": `${product.price.beforeDiscount}$`}}</span></p>
+                            <h2>{{product.title}}</h2>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <button>ADD TO CART <i class="fa-solid fa-cart-shopping"></i></button>
+                        </article>
+                   </div>
+                </div>
+            }
+        </section>
+        <div class="products-number">
+            <p>Showing {{showingProducts}} of {{totalProducts}} products</p>
+        </div>
+    </main>
+</section>

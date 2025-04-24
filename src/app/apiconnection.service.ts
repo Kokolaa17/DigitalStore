@@ -7,11 +7,14 @@ import { Injectable } from '@angular/core';
 export class APIconnectionService {
 
   constructor(private Http: HttpClient) {
-    this.getBestSellers()
+   
   }
   
   getBestSellers(){
     return this.Http.get("https://api.everrest.educata.dev/shop/products/search?page_size=6&rating=4")
   }
 
+  getAllProducts(){
+    return this.Http.get("https://api.everrest.educata.dev/shop/products/all?page_index=1&page_size=38")
+  }
 }

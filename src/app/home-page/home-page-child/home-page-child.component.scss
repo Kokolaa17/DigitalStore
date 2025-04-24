@@ -1,0 +1,48 @@
+.commerical-section {
+    max-width: 1440px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #E8E8E8;
+    margin: 50px auto;
+    .commerical {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        &:hover {
+            .bicyle {
+                transition: 0.3s;
+                transform: translateX(190px);
+            }
+            .box {
+                transition: 0.3s;
+                transform: translateY(-15px);
+            }
+            .prices {
+                transition: 0.3s;
+                transform: translateX(-15px);
+            }
+            .clock {
+                transition: 0.3s;
+                transform: rotate(360deg);
+            }
+            p {
+                transition: 0.3s;
+                scale: 1.1;
+                transition-delay: 0.3s;
+                color: #6c3bff;
+            }
+        }
+        svg {
+            width: 70px;
+        }
+        p {
+            font-size: 20px;
+            font-family: "Roboto Flex", sans-serif;
+            max-width: 100px;
+            font-weight: 600;
+        }
+    }
+}
