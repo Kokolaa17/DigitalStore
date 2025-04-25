@@ -72,6 +72,7 @@ nav {
         border: 1px solid #010101;
         border-radius: 30px;
         align-items: center;
+        position: relative;
         input {
             width: 0;
             outline: none;
@@ -87,6 +88,49 @@ nav {
             &:hover {
                 transition: 0.3s;
                 color: #5B32D6;
+            }
+        }
+        .searched-products {
+            position: absolute;
+            left: 0px;
+            top: 40px;
+            max-height: 300px;
+            margin-top: 5px;
+            background: white;
+            border-radius: 8px;
+            overflow-y: scroll;
+            box-shadow: 0 4px 8px #010101(0, 0, 0, 0.1);
+            z-index: 100;
+            width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .product {
+                display: flex;
+                align-items: center;
+                padding: 10px 15px;
+                cursor: pointer;
+                border-bottom: 1px solid #a6a6a6;
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: contain;
+                }
+                .price-title {
+                    margin-left: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    h2 {
+                        font-size: 18px;
+                        font-family: "Roboto Flex", sans-serif;
+                        font-weight: 400;
+                    }
+                    p {
+                        font-size: 16px;
+                        font-family: cursive;
+                    }
+                }
             }
         }
     }

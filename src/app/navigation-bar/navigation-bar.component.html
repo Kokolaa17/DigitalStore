@@ -6,8 +6,19 @@
         <h1 routerLink="/">Digital<span>Store</span></h1>
 
         <div class="search">
-            <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Search..." [(ngModel)]="searchWord" (keyup)="searchProduct(searchWord)">
             <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="searched-products">
+                @for (product of displaySearchedProducts; track $index) {
+                    <div class="product">
+                        <img [src]="product.thumbnail" alt="{{product.title}}">
+                        <div class="price-title">
+                            <h2>{{product.title}}</h2>
+                            <p>{{product.price.current}}$</p>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
 
         <div class="signIn-logIn">
@@ -25,3 +36,5 @@
         </div>
     </div>
 </nav>
+
+

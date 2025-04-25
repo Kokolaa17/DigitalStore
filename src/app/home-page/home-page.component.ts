@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { APIconnectionService } from '../apiconnection.service';
 import { HomePageChildComponent } from "./home-page-child/home-page-child.component";
 import { RouterModule } from '@angular/router';
+import { Products } from '../products';
 
 @Component({
   selector: 'app-home-page',
@@ -23,7 +24,7 @@ export class HomePageComponent {
   ]
 
   public indexOfImage: number = 0;
-  public bestSellers: any;
+  public bestSellers: Products[] = []
 
   changeIndex(){
     setInterval(() => {

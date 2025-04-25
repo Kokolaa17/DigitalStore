@@ -26,8 +26,6 @@
                             <h2>{{product.title}}</h2>
                             <div class="stars">
                                 <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
                             </div>
                             <button>ADD TO CART <i class="fa-solid fa-cart-shopping"></i></button>
                         </article>
@@ -36,7 +34,26 @@
             }
         </section>
         <div class="products-number">
-            <p>Showing {{showingProducts}} of {{totalProducts}} products</p>
+           <div class="route-pages">
+                <i class="fa-duotone fa-solid fa-chevron-left"></i>
+                @for (page of productPages; track $index) {
+                    <button (click)="getAllProducts(page, pageProductsSize)">{{page}}</button>
+                }
+                <i class="fa-duotone fa-solid fa-chevron-right"></i>
+           </div>
+
+           <div class="per-page">
+            <label for="">Items per Page:</label>
+            <select [(ngModel)]="pageProductsSize" (change)="getAllProducts(1, pageProductsSize)">
+                <option value="" disabled selected hidden>9</option>
+                <option value="6">6</option>
+                <option value="9">9</option>
+                <option value="18">18</option>
+                <option value="36">36</option>
+                <option value="38">ALL</option>
+            </select>
         </div>
+        </div>
+        <p>Showing {{showingProducts}} products on this page, out of {{totalProducts}} total.</p>
     </main>
 </section>
