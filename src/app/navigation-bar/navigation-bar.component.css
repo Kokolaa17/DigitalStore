@@ -1,0 +1,170 @@
+nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+nav .commerical {
+  text-align: center;
+  background-color: #010101;
+}
+nav .commerical h5 {
+  font-family: "Anton", sans-serif;
+  color: #a6a2a2;
+  font-size: 16px;
+  padding: 7px;
+  letter-spacing: 4px;
+  font-weight: 400;
+}
+nav .navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 50px;
+  background-color: #fff;
+}
+nav h1 {
+  font-size: 40px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 500;
+  padding: 8px 0px;
+  cursor: pointer;
+  position: relative;
+}
+nav h1 span {
+  color: #5B32D6;
+}
+nav h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  width: 50%;
+  height: 2px;
+  background-color: #5B32D6;
+}
+nav h1::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  width: 100%;
+  height: 2px;
+  background-color: #010101;
+}
+nav h1:hover {
+  transition: 0.3s;
+}
+nav h1:hover::before {
+  transition: 0.3s;
+  width: 50%;
+  z-index: 1;
+}
+nav h1:hover::after {
+  transition: 0.3s;
+  width: 100%;
+}
+nav .search {
+  display: flex;
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 1px solid #010101;
+  border-radius: 30px;
+  align-items: center;
+  position: relative;
+}
+nav .search input {
+  width: 0;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  transition: 0.8s;
+  background: transparent;
+  width: 400px;
+}
+nav .search i {
+  color: #010101;
+  font-size: 18px;
+}
+nav .search i:hover {
+  transition: 0.3s;
+  color: #5B32D6;
+}
+nav .search .searched-products {
+  position: absolute;
+  left: 0px;
+  top: 40px;
+  max-height: 300px;
+  margin-top: 5px;
+  background: white;
+  border-radius: 8px;
+  overflow-y: scroll;
+  box-shadow: 0 4px 8px #010101 0, 0, 0, 0.1;
+  z-index: 100;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+nav .search .searched-products .product {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #a6a6a6;
+}
+nav .search .searched-products .product img {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+nav .search .searched-products .product .price-title {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+nav .search .searched-products .product .price-title h2 {
+  font-size: 18px;
+  font-family: "Roboto Flex", sans-serif;
+  font-weight: 400;
+}
+nav .search .searched-products .product .price-title p {
+  font-size: 16px;
+  font-family: cursive;
+}
+nav .signIn-logIn {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+nav .signIn-logIn .userAction {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 19px;
+  font-family: "Roboto Flex", sans-serif;
+  cursor: pointer;
+  position: relative;
+  font-weight: 300;
+}
+nav .signIn-logIn .userAction:hover i {
+  transition: 0.3s;
+  color: #5B32D6;
+}
+nav .signIn-logIn .burgerBarD {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+nav .signIn-logIn .burgerBarD .burgerBar {
+  font-size: 25px;
+  color: #5B32D6;
+}
+nav .signIn-logIn .burgerBarD .burgerBar:hover {
+  transition: 0.3s;
+  color: #2c02ab;
+}/*# sourceMappingURL=navigation-bar.component.css.map */

@@ -1,0 +1,46 @@
+.commerical-section {
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #E8E8E8;
+  margin: 50px auto;
+}
+.commerical-section .commerical {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.commerical-section .commerical:hover .bicyle {
+  transition: 0.3s;
+  transform: translateX(190px);
+}
+.commerical-section .commerical:hover .box {
+  transition: 0.3s;
+  transform: translateY(-15px);
+}
+.commerical-section .commerical:hover .prices {
+  transition: 0.3s;
+  transform: translateX(-15px);
+}
+.commerical-section .commerical:hover .clock {
+  transition: 0.3s;
+  transform: rotate(360deg);
+}
+.commerical-section .commerical:hover p {
+  transition: 0.3s;
+  scale: 1.1;
+  transition-delay: 0.3s;
+  color: #6c3bff;
+}
+.commerical-section .commerical svg {
+  width: 70px;
+}
+.commerical-section .commerical p {
+  font-size: 20px;
+  font-family: "Roboto Flex", sans-serif;
+  max-width: 100px;
+  font-weight: 600;
+}/*# sourceMappingURL=home-page-child.component.css.map */

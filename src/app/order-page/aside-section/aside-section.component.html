@@ -1,0 +1,38 @@
+<aside>
+    <h2>Browse by :</h2>
+    <div class="filter-options">
+        <h3 (click)="chooseCategoryes()"> Category <span #openClose1>+</span></h3>
+        <div #categories class="categorys">
+           @for (category of displayCategorys; track $index) {
+            <button><img [src]="category.image" [alt]="category.name"><span>{{category.name}}</span></button>
+           }
+        </div>
+        <h3 (click)="chooseBrands()">Brand <span  #openClose2>+</span></h3>
+        <ul #brands class="brands">
+            @for (brand of displayBrands; track $index) {
+                <li><i class="fa-solid fa-tag"></i> <p>{{brand}}</p></li>
+            }
+        </ul>
+        <h3 (click)="chooseRatings()"> Rating <span #openClose3>+</span></h3>
+        <div #ratings class="ratings">
+            <div class="star">
+              <p><i class="fa-solid fa-star" style="color: #e8e8e8;"></i> 5 Only</p>
+            </div>
+            <div class="star">
+              <p><i class="fa-solid fa-star" style="color: #e8e8e8;"></i> 4 And up</p>
+            </div>
+            <div class="star">
+              <p><i class="fa-solid fa-star" style="color: #e8e8e8;"></i> 3 And up</p>
+            </div>
+            <div class="star">
+              <p><i class="fa-solid fa-star" style="color: #e8e8e8;"></i> 2 And up</p>
+            </div>
+            <div class="star">
+              <p><i class="fa-solid fa-star" style="color: #e8e8e8;"></i> 1 And up</p>
+            </div>
+          </div>
+        <h3>Price <span>+</span></h3>
+    </div>
+</aside>
+
+

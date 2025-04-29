@@ -1,0 +1,43 @@
+<section class="details">
+    <div class="left-image">
+        <h5 [style.display]="productDetails.price.discountPercentage <= 0 ? 'none' : 'block' ">{{productDetails.price.discountPercentage}}%</h5>
+            <button (click)="prevImage(productDetails.images)" class="prevBtn"><i class="fa-solid fa-arrow-left"></i></button>
+            <img [src]="productDetails.images[slideIndex]" alt="{{productDetails.title}}">
+            <button (click)="nextImage(productDetails.images)" class="nextBtn"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <div class="right-article">
+        <article>
+            <h1>{{productDetails.title}}</h1>
+            <h2>Price : {{productDetails.price.current}}$<span>{{productDetails.price.beforeDiscount == productDetails.price.current ? "" : `${productDetails.price.beforeDiscount}$`}}</span></h2>
+            <div class="details-stars">
+                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                <span>{{productDetails.rating}}</span>
+            </div>
+            <h3 [style.color]="productDetails.stock <= 0 ? 'red' : 'green'">
+                @if (productDetails.stock <= 0) {
+                <i class="fa-solid fa-x"></i> Not in stock
+                }
+                @else {
+                   {{productDetails.stock}} in stock <i class="fa-solid fa-check"></i> 
+                }
+            </h3>
+            <div class="item-description">
+                <h3>Description</h3>
+                <p>{{productDetails.description}}</p>
+            </div>
+            <div class="commerical">
+                <p><i class="fa-solid fa-calendar-check fa-beat"></i> {{productDetails.warranty}} Year full warranty</p>
+                <p><i class="fa-solid fa-table-cells-row-lock fa-beat"></i> Secure payment</p>
+                <p><i class="fa-solid fa-truck-fast fa-beat"></i> Worldwide shipping</p>
+            </div>
+            <ul>
+                <li>Category: {{productDetails.category.name}}</li>
+                <li>Brand: {{productDetails.brand}}</li>
+                <li>Issue Date: {{productDetails.issueDate.split("T")[0]}}</li>
+            </ul>
+            <div class="addToCart">
+                <button id="cartAdder" onclick="buttonCartAdder('6527daf557e3ec956179e73d', 0)">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
+            </div>
+        </article>
+    </div>
+</section>

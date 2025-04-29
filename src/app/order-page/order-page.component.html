@@ -1,24 +1,18 @@
 <section class="page-indicator"> 
-    <p routerLink="">Home</p>
+    <p routerLink="/">Home</p>
     <i class="fa-solid fa-greater-than fa-beat"></i>
     <p routerLinkActive="active" routerLink="/orderPage">Order page <i class="fa-solid fa-cart-shopping"></i></p>
 </section>
 
 <section class="order-page-container">
-    <aside>
-        <h2>Browse by</h2>
-        <h3>Category</h3>
-        <h3>Brand</h3>
-        <h3>Rating</h3>
-        <h3>Price</h3>
-    </aside>
-    
+    <app-aside-section></app-aside-section>
+
     <main>
         <section class="products">
             @for (product of displayProducts; track $index) {
                 <div class="card">
                     <div class="image-container">
-                      <img [src]="product.thumbnail" alt="Modern Laptop">
+                      <img routerLink="/orderPage/detailsPage/{{product._id}}" [src]="product.thumbnail" alt="Modern Laptop">
                     </div>
                    <div class="content">
                         <article>
@@ -33,7 +27,7 @@
                 </div>
             }
         </section>
-        <div class="products-number">
+        <div class="products-number" #pageIndicators> 
            <div class="route-pages">
                 <i class="fa-duotone fa-solid fa-chevron-left"></i>
                 @for (page of productPages; track $index) {
@@ -42,18 +36,24 @@
                 <i class="fa-duotone fa-solid fa-chevron-right"></i>
            </div>
 
-           <div class="per-page">
-            <label for="">Items per Page:</label>
-            <select [(ngModel)]="pageProductsSize" (change)="getAllProducts(1, pageProductsSize)">
-                <option value="" disabled selected hidden>9</option>
-                <option value="6">6</option>
-                <option value="9">9</option>
-                <option value="18">18</option>
-                <option value="36">36</option>
-                <option value="38">ALL</option>
-            </select>
+            <div class="per-page">
+                <label for="">Items per Page:</label>
+                <select [(ngModel)]="pageProductsSize" (change)="getAllProducts(1, pageProductsSize)">
+                    <option value="" disabled selected hidden>9</option>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
+                    <option value="18">18</option>
+                    <option value="36">36</option>
+                    <option value="38">ALL</option>
+                </select>
+            </div>
         </div>
-        </div>
-        <p>Showing {{showingProducts}} products on this page, out of {{totalProducts}} total.</p>
+        @if(showingProducts > 0){
+            <p>Showing {{showingProducts}} products on this page, out of {{totalProducts}} total.</p>
+        }
+        @else {
+            <p style="margin-top: 90px; font-size: 16px;">The product you're looking for is unavailable!</p>
+        }
+       
     </main>
 </section>

@@ -14,8 +14,8 @@
 <section class="best-sellers">
     @for (product of bestSellers; track $index) {
         <div class="card">
-            <div class="image-container">
-              <img [src]="product.thumbnail" alt="Modern Laptop">
+            <div  class="image-container">
+              <img routerLink="/orderPage/detailsPage/{{product._id}}"  [src]="product.thumbnail" alt="Modern Laptop">
             </div>
            <div class="content">
                 <article>

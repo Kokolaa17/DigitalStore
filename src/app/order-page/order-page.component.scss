@@ -18,17 +18,7 @@
     display: flex;
     justify-content: space-between;
     margin: 30px auto;
-    aside {
-        width: 300px;
-        padding-left: 50px;
-        h2 {
-            font-family: "Roboto Flex", sans-serif;
-            font-size: 20px;
-            font-weight: 400;
-            border-bottom: 1px solid #E8E8E8;
-            width: fit-content;
-        }
-    }
+    min-height: 45vh;
     main {
         position: relative;
         width: 100%;
@@ -50,12 +40,12 @@
                 .image-container {
                     height: 280px;
                     overflow: hidden;
-                    background: #f0f0f0;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     padding: 20px;
-                    background: linear-gradient(135deg, #ECE9E6 0%, #FFFFFF 100%);
+                    background-color: #fff;
+                    border-bottom: 1px solid #E8E8E8;
                     img {
                         max-width: 95%;
                         max-height: 95%;
@@ -224,7 +214,7 @@
             text-align: center;
             color: #86868b;
             font-size: 14px;
-            margin-top: 5px;
+            margin-top: 30px;
         }
     }
 }

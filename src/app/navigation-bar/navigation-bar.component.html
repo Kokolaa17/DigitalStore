@@ -6,9 +6,9 @@
         <h1 routerLink="/">Digital<span>Store</span></h1>
 
         <div class="search">
-            <input type="text" placeholder="Search..." [(ngModel)]="searchWord" (keyup)="searchProduct(searchWord)">
+            <input #searchBar type="text" placeholder="Search..." [(ngModel)]="searchWord" (keyup)="searchProduct(searchWord)" (keyup.enter)="displaySearchedProductsDown()"  (focus)="searchAppear()" (input)="searchProduct(searchWord); searchAppear()" (blur)="hideResultsWithDelay()">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <div class="searched-products">
+            <div #searchResault (mousedown)="cancelBlurHide = true" (mouseup)="cancelBlurHide = false" class="searched-products">
                 @for (product of displaySearchedProducts; track $index) {
                     <div class="product">
                         <img [src]="product.thumbnail" alt="{{product.title}}">
