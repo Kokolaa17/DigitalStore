@@ -49,10 +49,10 @@
             </div>
         </div>
         @if(showingProducts > 0){
-            <p>Showing {{showingProducts}} products on this page, out of {{totalProducts}} total.</p>
+            <p class="bottom-indicators">Showing {{showingProducts}} products on this page, out of {{totalProducts}} total.</p>
         }
         @else {
-            <p style="margin-top: 90px; font-size: 16px;">The product you're looking for is unavailable!</p>
+            <p class="bottom-indicators" style="margin-top: 90px; font-size: 16px;">The product you're looking for is unavailable!</p>
         }
        
     </main>

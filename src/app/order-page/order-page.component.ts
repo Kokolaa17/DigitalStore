@@ -20,6 +20,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getAllProducts(1, this.pageProductsSize)
     this.displaySearchedProducts()
+    this.transferFilteredProducts()
   }
 
   ngAfterViewInit(): void {
@@ -80,5 +81,15 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     this.https.pageIndicatorsTransfer.next(this.pageIndicators)
   }
   
-  
+  transferFilteredProducts(){
+   this.https.transferProductsFromFilter.subscribe({
+    next: (data : MainProductsObject) => {
+      this.displayProducts = data.products
+      this.totalProducts = data.total
+      this.showingProducts = data.products.length
+
+      this.pageIndicators.nativeElement.style.display = "none"
+    }
+  })
+  }
 }

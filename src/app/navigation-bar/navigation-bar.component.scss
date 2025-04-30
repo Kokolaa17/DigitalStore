@@ -158,6 +158,9 @@ nav {
                 display: flex;
                 align-items: center;
                 cursor: pointer;
+                font-size: 25px;
+                color: #5B32D6;
+                font-family: "Anton", sans-serif;
                 .burgerBar {
                     font-size: 25px;
                     color: #5B32D6;
@@ -167,5 +170,36 @@ nav {
                     }
                 }
             }
+    }
+    .sideMenu {
+        position: fixed;
+        right: 0px;
+        background-color: #fff;
+        height: 100%;
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        transform: translateX(500px);
+        transition: 0.3s;
+        ul {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            list-style: none;
+            width: 90%;
+            text-align: center;
+            li {
+                font-size: 20px;
+                cursor: pointer;
+                font-family: "Roboto Flex", sans-serif;
+                letter-spacing: 1px;
+                font-weight: 300;
+                border-bottom: 1px solid #e8e8e8;
+                width: 100%;
+                border-radius: 50%;
+                padding-bottom: 5px;
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ export class APIconnectionService {
 
   public searchedProductsTransfer : Subject<MainProductsObject> = new Subject;
   public pageIndicatorsTransfer: Subject<ElementRef> = new Subject
+  public transferProductsFromFilter: Subject<MainProductsObject> = new Subject;
 
   
   getBestSellers(){
@@ -39,7 +40,19 @@ export class APIconnectionService {
     return this.Http.get<Categorys[]>(`https://api.everrest.educata.dev/shop/products/categories`)
   }
 
+  getProductByCategorys(categoryID : string){
+    return this.Http.get<MainProductsObject>(`https://api.everrest.educata.dev/shop/products/category/${categoryID}?page_size=28`)
+  }
+
   getBrands(){
     return this.Http.get<string[]>("https://api.everrest.educata.dev/shop/products/brands")
+  }
+
+  getByBrands(brandName : string){
+    return this.Http.get<MainProductsObject>(`https://api.everrest.educata.dev/shop/products/brand/${brandName}?page_size=30`)
+  }
+
+  getByStars(StarNum : string){
+    return this.Http.get<MainProductsObject>(`https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=${StarNum}`)
   }
 }

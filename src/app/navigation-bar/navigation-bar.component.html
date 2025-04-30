@@ -30,10 +30,23 @@
                 <i class="fa-solid fa-circle-user"></i>
                 <p>Log in</p>
             </div>
-            <div class="burgerBarD">
-                <i class="fa-solid fa-bars-staggered burgerBar"></i>
+            <div #burgerBar class="burgerBarD">
+                @if (!isMenuOpen) {
+                    <i (click)="openSideMenu()" class="fa-solid fa-bars-staggered"></i>
+                }
+                @else {
+                    <i (click)="openSideMenu()" class="fa-solid fa-x"></i>
+                }
             </div>
         </div>
+    </div>
+
+    <div [style.transform]="isMenuOpen ? 'translateX(0px)' : 'translateX(500px)'" class="sideMenu">
+        <ul>
+            <li routerLink="/" routerLinkActive="activeLink" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</li>
+            <li routerLink="/orderPage" routerLinkActive="activeLink" (click)="closeMenu()">Shop</li>
+            <li (click)="closeMenu()">About</li>
+        </ul>
     </div>
 </nav>
 

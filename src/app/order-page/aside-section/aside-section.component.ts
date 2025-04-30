@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { APIconnectionService } from '../../apiconnection.service';
 import { Categorys } from '../../categorys';
+import { MainProductsObject } from '../../main-products-object';
+
 
 
 @Component({
@@ -19,6 +21,7 @@ export class AsideSectionComponent implements OnInit  {
     this.getBrands()
   }
 
+
   public displayCategorys: Categorys[] = [];
   @ViewChild("openClose1") public icon1! : ElementRef;
   @ViewChild("categories") public categories! : ElementRef;
@@ -29,6 +32,12 @@ export class AsideSectionComponent implements OnInit  {
 
   @ViewChild("openClose3") public icon3! : ElementRef;
   @ViewChild("ratings") public ratings! : ElementRef;
+
+  @ViewChild("chosenCategory") public chosenCategory! :ElementRef;
+
+  public filteredProducts: MainProductsObject = {} as MainProductsObject;
+  
+  
 
   chooseCategoryes() {
     const currentIcon = this.icon1.nativeElement.textContent;
@@ -94,4 +103,31 @@ export class AsideSectionComponent implements OnInit  {
       error:(error) => console.log(error)
     })
   }
+
+  getByCategory(CategoryID: string){
+    this.https.getProductByCategorys(CategoryID).subscribe({
+      next: (data : MainProductsObject) => {
+        this.filteredProducts = data
+        this.https.transferProductsFromFilter.next(this.filteredProducts)
+      }
+    })
+  }
+
+  getByBrand(brandName : string){
+    this.https.getByBrands(brandName).subscribe({
+      next: (data: MainProductsObject) => {
+        this.filteredProducts = data
+        this.https.transferProductsFromFilter.next(this.filteredProducts)
+      }
+    })
+  }
+
+ filterByStar(StarNum : string){
+  this.https.getByStars(StarNum).subscribe({
+    next: (data: MainProductsObject) => {
+      this.filteredProducts = data
+      this.https.transferProductsFromFilter.next(this.filteredProducts)
+    }
+  })
+ }
 }

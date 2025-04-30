@@ -24,10 +24,13 @@ export class NavigationBarComponent implements OnInit {
   public searchWord: string = "";
   public displaySearchedProducts: Products[] = []
   public transferDataForDown: MainProductsObject = {} as MainProductsObject;
-  cancelBlurHide: boolean = false;
+  public cancelBlurHide: boolean = false;
+  public isMenuOpen: boolean = false;
   @ViewChild("searchBar") public search! : ElementRef;
   @ViewChild("searchResault") public searchResault! : ElementRef;
   @ViewChild('pageIndicators') public pageIndicators!: ElementRef;
+  @ViewChild("sideMenu") public sideMenu! : ElementRef;
+
 
   searchProduct(searchWord : string){
     this.https.searchProduct(searchWord).subscribe({
@@ -66,5 +69,13 @@ export class NavigationBarComponent implements OnInit {
     this.https.pageIndicatorsTransfer.subscribe((data: ElementRef) => {
       this.pageIndicators = data;
     });
+  }
+
+  openSideMenu(){
+    this.isMenuOpen = !this.isMenuOpen
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
   }
 }
