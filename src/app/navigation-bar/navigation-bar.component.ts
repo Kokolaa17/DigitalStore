@@ -4,10 +4,12 @@ import { APIconnectionService } from '../apiconnection.service';
 import { FormsModule } from '@angular/forms';
 import { MainProductsObject } from '../main-products-object';
 import { Products } from '../products';
+import { SignUpComponent } from "./sign-up/sign-up.component";
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @Component({
   selector: 'app-navigation-bar',
-  imports: [RouterModule, FormsModule],
+  imports: [RouterModule, FormsModule, SignUpComponent, SignInComponent],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.scss'
 })
@@ -19,6 +21,8 @@ export class NavigationBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.recivePageIndicators()
+    this.closeSignUp()
+    this.closeSignIn()
   }
 
   public searchWord: string = "";
@@ -26,6 +30,8 @@ export class NavigationBarComponent implements OnInit {
   public transferDataForDown: MainProductsObject = {} as MainProductsObject;
   public cancelBlurHide: boolean = false;
   public isMenuOpen: boolean = false;
+  public isSignUpOpen: boolean = false;
+  public isSignInOpen: boolean = false;
   @ViewChild("searchBar") public search! : ElementRef;
   @ViewChild("searchResault") public searchResault! : ElementRef;
   @ViewChild('pageIndicators') public pageIndicators!: ElementRef;
@@ -77,5 +83,25 @@ export class NavigationBarComponent implements OnInit {
 
   closeMenu() {
     this.isMenuOpen = false;
+  }
+
+  openSignUp(){
+    this.isSignUpOpen = !this.isSignUpOpen
+  }
+
+  closeSignUp(){
+    this.https.transferSignUpToggle.subscribe({
+      next: (data:boolean) => this.isSignUpOpen = data
+    })
+  }
+
+  openSignIn(){
+    this.isSignInOpen = !this.isSignInOpen;
+  }
+
+  closeSignIn(){
+    this.https.transferLogInToggle.subscribe({
+      next: (data:boolean) => this.isSignInOpen = data
+    })
   }
 }

@@ -1,0 +1,35 @@
+<section>
+    <div class="login-form" id="loginForm">
+        <button (click)="closeSignIn()" class="closeButton">X</button>
+
+        <div class="left">
+            <h2>Sign in</h2>
+            <form [formGroup]="LogInForm" (ngSubmit)="logInAccount()">
+                <div class="inputs">
+                    <input id="email2" type="email" placeholder="+" formControlName="email">
+                    <label for="email2"><i class="fa-solid fa-envelope"></i> Email</label>
+                </div>
+
+                <div class="inputs">
+                    <input id="password2" type="password" placeholder="+" formControlName="password">
+                    <label for="password2"><i class="fa-solid fa-lock"></i> Password</label>
+                </div>
+                <div class="displayErorrText">
+                    @if (badRequest) {
+                        <h6 [style.display]="badRequest ? 'block' : 'none'">{{badRequest}} <i class="fa-solid fa-circle-exclamation fa-fade"></i></h6>
+                    }
+                    @if (isLogedIn) {
+                        <h4 [style.display]="isLogedIn ? 'block' : 'none'">Logged in successfully <i class="fa-solid fa-check fa-fade"></i></h4>
+                    }
+                </div>
+                <div>
+                    <button class="logInButton" type="submit">Sign in</button>
+                    <p>Don`t have an account?<span> Signup now</span></p>
+                </div>
+            </form>
+        </div>
+        <div class="right">
+            <img src="/images/loginlogo.avif" alt="Ecomerce">
+        </div>
+    </div>
+</section>

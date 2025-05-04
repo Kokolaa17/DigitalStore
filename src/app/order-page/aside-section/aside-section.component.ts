@@ -2,12 +2,13 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { APIconnectionService } from '../../apiconnection.service';
 import { Categorys } from '../../categorys';
 import { MainProductsObject } from '../../main-products-object';
+import { FormsModule } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-aside-section',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './aside-section.component.html',
   styleUrl: './aside-section.component.scss'
 })
@@ -33,61 +34,37 @@ export class AsideSectionComponent implements OnInit  {
   @ViewChild("openClose3") public icon3! : ElementRef;
   @ViewChild("ratings") public ratings! : ElementRef;
 
-  @ViewChild("chosenCategory") public chosenCategory! :ElementRef;
+  @ViewChild("priceFilter") public priceFilter! :ElementRef;
+  @ViewChild("openClose4") public icon4! : ElementRef;
+  public minPrice: string = ""
+  public maxPrice: string = ""
+  public isPriceErrorVisible = false;
 
   public filteredProducts: MainProductsObject = {} as MainProductsObject;
   
-  
 
-  chooseCategoryes() {
-    const currentIcon = this.icon1.nativeElement.textContent;
-    this.brands.nativeElement.style.display = "none"
-    this.icon2.nativeElement.textContent = "+"
-    this.ratings.nativeElement.style.display = "none"
-    this.icon3.nativeElement.textContent = "+"
+
   
   
-    if (currentIcon === "+") {
-      this.icon1.nativeElement.textContent = "-";
-      this.categories.nativeElement.style.display = "flex";
-    } else {
-      this.icon1.nativeElement.textContent = "+";
-      this.categories.nativeElement.style.display = "none";
-    }
-  }
 
-  chooseBrands(){
-    const currentIcon = this.icon2.nativeElement.textContent;
-    this.categories.nativeElement.style.display = "none"
-    this.icon1.nativeElement.textContent = "+"
-    this.ratings.nativeElement.style.display = "none"
-    this.icon3.nativeElement.textContent = "+"
+  toggleSection(section: 'categories' | 'brands' | 'ratings' | 'price') {
+    const sections = [
+      { name: 'categories', icon: this.icon1, element: this.categories },
+      { name: 'brands', icon: this.icon2, element: this.brands },
+      { name: 'ratings', icon: this.icon3, element: this.ratings },
+      { name: 'price', icon: this.icon4, element: this.priceFilter }
+    ];
   
-
-    if (currentIcon === "+") {
-      this.icon2.nativeElement.textContent = "-";
-      this.brands.nativeElement.style.display = "flex";
-    } else {
-      this.icon2.nativeElement.textContent = "+";
-      this.brands.nativeElement.style.display = "none";
-    }
-  }
-
-  chooseRatings(){
-    const currentIcon = this.icon3.nativeElement.textContent;
-    this.categories.nativeElement.style.display = "none"
-    this.icon1.nativeElement.textContent = "+"
-    this.brands.nativeElement.style.display = "none"
-    this.icon2.nativeElement.textContent = "+"
-  
-
-    if (currentIcon === "+") {
-      this.icon3.nativeElement.textContent = "-";
-      this.ratings.nativeElement.style.display = "flex";
-    } else {
-      this.icon3.nativeElement.textContent = "+";
-      this.ratings.nativeElement.style.display = "none";
-    }
+    sections.forEach(s => {
+      const isTarget = s.name === section;
+      s.icon.nativeElement.textContent = isTarget
+        ? (s.icon.nativeElement.textContent === '+' ? '-' : '+')
+        : '+';
+      s.element.nativeElement.style.display = isTarget
+        ? (s.icon.nativeElement.textContent === '-' ? 'flex' : 'none')
+        : 'none';
+    });
+    this.togglePriceWarning()
   }
 
   getCategorys(){
@@ -130,4 +107,28 @@ export class AsideSectionComponent implements OnInit  {
     }
   })
  }
+
+ applyPriceFilter(minPrice: string, maxPrice: string){
+  this.https.getByPrice(minPrice, maxPrice).subscribe({
+    next: (data: MainProductsObject) => {
+      this.filteredProducts = data
+      this.https.transferProductsFromFilter.next(this.filteredProducts)   
+    }
+  })
+ }
+
+ togglePriceWarning() {
+  this.isPriceErrorVisible = this.icon4.nativeElement.textContent !== '+';
+}
+
+getAllProducts(pageIndex : number, pageProductsSize: string ){
+  this.https.getAllProducts(pageIndex, pageProductsSize).subscribe({
+    next: (data:MainProductsObject) => {
+      this.https.transferProductsAll.next(data)
+    },
+    error: (error) => console.log(error)
+  })
+  
+}
+
 }

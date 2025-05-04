@@ -21,6 +21,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     this.getAllProducts(1, this.pageProductsSize)
     this.displaySearchedProducts()
     this.transferFilteredProducts()
+    this.transferProductsAll()
   }
 
   ngAfterViewInit(): void {
@@ -91,5 +92,26 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       this.pageIndicators.nativeElement.style.display = "none"
     }
   })
+  }
+
+  transferProductsAll(){
+    this.https.transferProductsAll.subscribe({
+      next: (data:MainProductsObject) => {
+        this.displayProducts = data.products
+        this.totalProducts = data.total
+        this.showingProducts = data.products.length
+
+        let pageSize =  Math.ceil(data.total / data.limit)
+        this.productPages = [];
+
+        for(let i = 1; i <= pageSize; i++) {
+          this.productPages.push(i)
+        }
+
+       this.pageIndicators.nativeElement.style.display = "flex"
+       
+      },
+      error: (error) => console.log(error)
+    })
   }
 }

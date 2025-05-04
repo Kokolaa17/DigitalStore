@@ -1,0 +1,84 @@
+<section>
+    <div class="account-creation">
+        <button (click)="closeSignUp()" class="close-button">X</button>
+        <h2>Create Account</h2>
+        <form  [formGroup]="createAccount" (ngSubmit)="registerAccount()">
+            <div class="up-inputs">
+                <div class="left">
+                    <div class="inputs">
+                        <input formControlName="firstName" id="firstName" type="text"placeholder="+">
+                        <label for="FirstName"><i class="fa-solid fa-user-tie"></i> First Name</label>
+                    </div>
+                    
+                    <div class="inputs">
+                        <input formControlName="email" id="email" type="email"placeholder="+">
+                        <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+                    </div>
+
+                    <div class="inputs">
+                        <input formControlName="phone" id="phone" type="tel"placeholder="+" value="+995">
+                        <label for="phone"><i class="fa-solid fa-phone"></i> Phone</label>
+                    </div>
+                    
+                    <div class="inputs">
+                        <input formControlName="address" id="address" type="text" placeholder="+">
+                        <label for="address"><i class="fa-solid fa-map"></i> Address</label>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="inputs">    
+                        <input formControlName="lastName" id="lastName" type="text" placeholder="+">
+                        <label for="lastName"><i class="fa-solid fa-user-tie"></i> Last Name</label>
+                    </div>
+                    
+                    <div class="inputs">
+                        <input formControlName="password" id="password" type="password" placeholder="+">
+                        <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
+                    </div>
+
+                    <div class="inputs">
+                        <input formControlName="zipcode" id="zipcode" type="text" placeholder="+">
+                        <label for="zipcode"><i class="fa-solid fa-file-zipper"></i> ZIP Code</label>
+                    </div>
+                    
+                    <div class="inputs">
+                        <input formControlName="age" id="age" type="number" placeholder="+">
+                        <label for="age"><i class="fa-solid fa-cake-candles"></i> Age</label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="center-bottom">
+                <div class="image">
+                    <input formControlName="avatar" id="avatar" type="text" placeholder="+"> 
+                    <label for="avatar"><i class="fa-solid fa-image"></i> Image</label>
+                </div>
+                <div class="Gender">
+                    <div class="gender-content">
+                        <h4><i class="fa-solid fa-venus-mars"></i> Gender:</h4>
+                        <select formControlName="gender">
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                        </select>
+                    </div>
+                    @if (isRegistered) {
+                        <p style="color: green; margin-right: 30px;">Account Created <i class="fa-solid fa-check fa-fade"></i></p>
+                    }
+                    @else if(isRegistered == false) {
+                        <p [style.display]="showErrors ? 'block' : 'none'" style="color: red; margin-right: 30px;"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{badRequest}}</p>
+                    }
+                    
+                </div>
+            </div>
+            <button [style.backgroundColor]="createAccount.invalid ? '#010101ad' : '#010101'" [disabled]="createAccount.invalid" class="submitButton" type="submit">Register</button>
+            @if (isRegistered == false) {
+                <ul [style.display]="showErrors ? 'flex' : 'none'">
+                    @for (error of badRequestKeys; track $index) {
+                        <li>{{error}}</li>
+                    }
+                </ul>
+            }
+        </form>
+        <ul></ul>
+    </div>
+</section>

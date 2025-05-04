@@ -22,3 +22,12 @@
         transform: translateY(0);
     }
 }
+
+@keyframes fromTop {
+    from {
+        transform: translateY(-1000px);
+    }
+    to {
+        transform: translateY(0px);
+    }   
+}

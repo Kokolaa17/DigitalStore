@@ -1,19 +1,19 @@
 <aside>
     <h2>Browse by :</h2>
     <div class="filter-options">
-        <h3 (click)="chooseCategoryes()"> Category <span #openClose1>+</span></h3>
+        <h3 (click)="toggleSection('categories')"> Category <span #openClose1>+</span></h3>
         <div #categories class="categorys">
            @for (category of displayCategorys; track $index) {
             <button #choosenCategory (click)="getByCategory(category.id)"><img [src]="category.image" [alt]="category.name"><span>{{category.name}}</span></button>
            }
         </div>
-        <h3 (click)="chooseBrands()">Brand <span  #openClose2>+</span></h3>
+        <h3 (click)="toggleSection('brands')">Brand <span  #openClose2>+</span></h3>
         <ul #brands class="brands">
             @for (brand of displayBrands; track $index) {
                 <li (click)="getByBrand(brand)"><i class="fa-solid fa-tag"></i> <p>{{brand}}</p></li>
             }
         </ul>
-        <h3 (click)="chooseRatings()"> Rating <span #openClose3>+</span></h3>
+        <h3 (click)="toggleSection('ratings')"> Rating <span #openClose3>+</span></h3>
         <div #ratings class="ratings">
             <div class="star">
               <p (click)="filterByStar(`4.5`)"><i class="fa-solid fa-star"></i> 5 Only</p>
@@ -31,8 +31,28 @@
               <p (click)="filterByStar(`1`)"><i class="fa-solid fa-star"></i> 1 And up</p>
             </div>
           </div>
-        <h3>Price <span>+</span></h3>
-    </div>
+        <h3 (click)="toggleSection('price')">Price <span #openClose4>+</span></h3>
+          <div #priceFilter class="price-filter">
+              <div class="price-inputs">
+                  <div class="min-price">
+                      <p>Min:</p>
+                      <input placeholder="50$" id="minRange" type="number" [(ngModel)]="minPrice">
+                  </div>
+                  <div class="max-price">
+                      <p>Max:</p>
+                      <input placeholder="8000$" id="maxRange" type="number" [(ngModel)]="maxPrice">
+                  </div>
+              </div>
+              <button [style.cursor]="minPrice > maxPrice || minPrice == '0' ? 'not-allowed' : 'pointer'" [disabled]="minPrice > maxPrice || minPrice == '0'" (click)="applyPriceFilter(this.minPrice, this.maxPrice)">Apply Filter</button>
+          </div>
+          @if (minPrice == "0") {
+            <h4 [style.display]="isPriceErrorVisible ? 'brand' : 'none'">Min price should be more than 0 <i class="fa-solid fa-exclamation fa-fade" style="color: #ff0033;"></i></h4>
+          }
+          @else if (minPrice > maxPrice) {
+            <h4 [style.display]="isPriceErrorVisible ? 'block' : 'none'">Min price should be less than max price <i class="fa-solid fa-exclamation fa-fade" style="color: #ff0033;"></i></h4>
+          }
+          <h3 (click)="getAllProducts(1, '9')" style="font-weight: bold;">GET ALL <i class="fa-solid fa-reply-all"></i></h3>
+      </div>
 </aside>
 
 

@@ -22,11 +22,11 @@
         </div>
 
         <div class="signIn-logIn">
-            <div class="userAction">
+            <div (click)="openSignUp()" class="userAction">
                 <i class="fa-regular fa-id-card"></i>
                 <p>Sign up</p>
             </div>
-            <div class="userAction">
+            <div (click)="openSignIn()" class="userAction">
                 <i class="fa-solid fa-circle-user"></i>
                 <p>Log in</p>
             </div>
@@ -49,5 +49,15 @@
         </ul>
     </div>
 </nav>
+
+@if (isSignUpOpen) {
+    <app-sign-up></app-sign-up>
+}
+
+@if (isSignInOpen) {
+    <app-sign-in></app-sign-in>
+}
+
+
 
 
