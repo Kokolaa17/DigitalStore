@@ -186,3 +186,15 @@ aside {
     }   
 }
 
+@media screen and (max-width: 800px) {
+    aside {
+        width: 100% !important;
+        padding-inline: 50px;
+        margin-bottom: 50px;
+        h2 {
+            text-align: center;
+            width: 100%;
+            border-bottom: none;
+        }
+    }
+}

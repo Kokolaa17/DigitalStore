@@ -3,16 +3,19 @@ import { APIconnectionService } from '../apiconnection.service';
 import { HomePageChildComponent } from "./home-page-child/home-page-child.component";
 import { RouterModule } from '@angular/router';
 import { Products } from '../products';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-home-page',
-  imports: [HomePageChildComponent, RouterModule],
+  imports: [HomePageChildComponent, RouterModule,],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent implements OnInit {
+Math: any;
 
-  constructor(private https: APIconnectionService){
+  constructor(private https: APIconnectionService, private cookies : CookieService){
    
   }
   
@@ -31,6 +34,9 @@ export class HomePageComponent implements OnInit {
 
   public indexOfImage: number = 0;
   public bestSellers: Products[] = []
+  math = Math;
+  Array = Array; 
+  
 
   changeIndex(){
     setInterval(() => {
@@ -47,4 +53,40 @@ export class HomePageComponent implements OnInit {
       error: (error) => console.log(error),
     })
   }
+
+  addToCart(productID : string){
+
+    if(this.cookies.get("userLogedIn")){
+      let itemToAdd = {
+        id: productID,
+        quantity: 1
+      }
+  
+      if(!this.cookies.get("cartID")){
+        this.https.addToCartItem(itemToAdd).subscribe({
+          next: (data: any) => {
+            console.log(data);
+          },
+          error: (err) => {
+            console.error('Error:', err);
+          }
+        });
+      }
+      else {
+        this.https.getProductQuantitiy(itemToAdd).subscribe({
+          next: (data: any) => {
+            console.log(data);
+          },
+          error: (err) => {
+            console.error('Error:', err);
+          }
+        })
+      }
+    }
+    else {
+      this.https.transferNoAccountToggle.next(true)
+    }
+  }
+
+   
 }

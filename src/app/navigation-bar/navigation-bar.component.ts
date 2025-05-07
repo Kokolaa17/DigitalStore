@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild,} from '@angular/core';
+import { Component, ElementRef, OnInit, SimpleChanges, ViewChild,} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { APIconnectionService } from '../apiconnection.service';
 import { FormsModule } from '@angular/forms';
@@ -6,23 +6,27 @@ import { MainProductsObject } from '../main-products-object';
 import { Products } from '../products';
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { SignInComponent } from './sign-in/sign-in.component';
+import { CookieService } from 'ngx-cookie-service';
+import { NoAccountComponent } from "../no-account/no-account.component";
 
 @Component({
   selector: 'app-navigation-bar',
-  imports: [RouterModule, FormsModule, SignUpComponent, SignInComponent],
+  imports: [RouterModule, FormsModule, SignUpComponent, SignInComponent, NoAccountComponent],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.scss'
 })
-export class NavigationBarComponent implements OnInit {
+export class NavigationBarComponent implements OnInit{
   
-  constructor(private https: APIconnectionService){
-    
+  constructor(private https: APIconnectionService, public cookies : CookieService){
+
   }
 
   ngOnInit(): void {
     this.recivePageIndicators()
     this.closeSignUp()
     this.closeSignIn()
+    this.getNoAccount()
+    this.getProductsInCart()
   }
 
   public searchWord: string = "";
@@ -32,6 +36,8 @@ export class NavigationBarComponent implements OnInit {
   public isMenuOpen: boolean = false;
   public isSignUpOpen: boolean = false;
   public isSignInOpen: boolean = false;
+  public isNoAccountOpen: boolean = false;
+  public productsInCart : number = 0;
   @ViewChild("searchBar") public search! : ElementRef;
   @ViewChild("searchResault") public searchResault! : ElementRef;
   @ViewChild('pageIndicators') public pageIndicators!: ElementRef;
@@ -104,4 +110,18 @@ export class NavigationBarComponent implements OnInit {
       next: (data:boolean) => this.isSignInOpen = data
     })
   }
+
+  logOut(){
+    this.cookies.delete("userLogedIn")
+  }
+
+
+  getNoAccount(){
+    this.https.transferNoAccountToggle.subscribe((data : boolean) => this.isNoAccountOpen = data)
+  }
+
+  getProductsInCart(){
+    this.https.transferCardProductsNumber.subscribe((data: number) => this.productsInCart = data)
+  }
+
 }

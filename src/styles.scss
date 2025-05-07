@@ -31,3 +31,16 @@
         transform: translateY(0px);
     }   
 }
+
+@keyframes fromBackRotate {
+    0% {
+        transform: rotate(120deg);
+        opacity: 0;
+        scale: 0;
+    }
+    100% {
+        transform: rotate(0deg);
+        opacity: 1;
+        scale: 1;
+    }
+}

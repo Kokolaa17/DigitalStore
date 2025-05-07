@@ -10,7 +10,9 @@
             <h1>{{productDetails.title}}</h1>
             <h2>Price : {{productDetails.price.current}}$<span>{{productDetails.price.beforeDiscount == productDetails.price.current ? "" : `${productDetails.price.beforeDiscount}$`}}</span></h2>
             <div class="details-stars">
-                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                @for (item of Array(math.round(productDetails.rating)); track $index) {
+                    <i style="color: gold;" class="fa-solid fa-star"></i>
+                  }
                 <span>{{productDetails.rating}}</span>
             </div>
             <h3 [style.color]="productDetails.stock <= 0 ? 'red' : 'green'">
@@ -36,7 +38,7 @@
                 <li>Issue Date: {{productDetails.issueDate.split("T")[0]}}</li>
             </ul>
             <div class="addToCart">
-                <button id="cartAdder" onclick="buttonCartAdder('6527daf557e3ec956179e73d', 0)">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
+                <button (click)="addToCart(productDetails._id)" id="cartAdder" onclick="buttonCartAdder('6527daf557e3ec956179e73d', 0)">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
             </div>
         </article>
     </div>

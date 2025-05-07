@@ -218,3 +218,13 @@
         }
     }
 }
+
+@media screen and (max-width: 800px) {
+    .order-page-container {
+        flex-direction: column;
+        .aside {
+            width: 100% !important;
+            padding-inline: 50px;
+        }
+    }
+}

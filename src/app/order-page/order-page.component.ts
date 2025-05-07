@@ -5,6 +5,7 @@ import { Products } from '../products';
 import { MainProductsObject } from '../main-products-object';
 import { FormsModule } from '@angular/forms';
 import { AsideSectionComponent } from './aside-section/aside-section.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-order-page',
@@ -13,7 +14,7 @@ import { AsideSectionComponent } from './aside-section/aside-section.component';
   styleUrl: './order-page.component.scss'
 })
 export class OrderPageComponent implements OnInit, AfterViewInit {
-  constructor(private https: APIconnectionService,){
+  constructor(private https: APIconnectionService, private cookies : CookieService){
    
   }
   
@@ -114,4 +115,40 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       error: (error) => console.log(error)
     })
   }
+
+  addToCart(productID : string){
+
+    if(this.cookies.get("userLogedIn")){
+
+      let itemToAdd = {
+        id: productID,
+        quantity: 1
+      }
+  
+      if(!this.cookies.get("cartID")){
+        this.https.addToCartItem(itemToAdd).subscribe({
+          next: (data: any) => {
+            console.log(data);
+          },
+          error: (err) => {
+            console.error('Error:', err);
+          }
+        });
+      }
+      else {  
+        this.https.getProductQuantitiy(itemToAdd).subscribe({
+          next: (data: any) => {
+            console.log(data);
+          },
+          error: (err) => {
+            console.error('Error:', err);
+          }
+        })
+      }
+    }
+    else {
+      this.https.transferNoAccountToggle.next(true)
+    }
+  }
+
 }

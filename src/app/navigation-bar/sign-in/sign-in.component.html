@@ -23,7 +23,7 @@
                     }
                 </div>
                 <div>
-                    <button class="logInButton" type="submit">Sign in</button>
+                    <button [style.backgroundColor]="LogInForm.invalid ? '#010101ad' : '#010101'" [disabled]="LogInForm.invalid" class="logInButton" type="submit">Sign in</button>
                     <p>Don`t have an account?<span> Signup now</span></p>
                 </div>
             </form>

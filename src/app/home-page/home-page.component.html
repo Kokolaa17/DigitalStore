@@ -2,7 +2,7 @@
     <img [src]="welcomeSectionImages[indexOfImage]" alt="backgroundImage">
     <article>
         <span>Best Prices</span>
-        <h2>Incredible Prices on All Your Favorite Items</h2>
+        <h2 class="welcome-h2">Incredible Prices on All Your Favorite Items</h2>
         <p>Get more for less on selected brands</p>
         <button routerLink="orderPage">Shop Now <i class="fa-solid fa-basket-shopping"></i></button>
     </article>
@@ -22,11 +22,11 @@
                     <p>{{product.price.current}}$<span>{{product.price.beforeDiscount == product.price.current ? "": `${product.price.beforeDiscount}$`}}</span></p>
                     <h2>{{product.title}}</h2>
                     <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+                        @for (item of Array(math.round(product.rating)); track $index) {
+                            <i class="fa-solid fa-star"></i>
+                          }
                     </div>
-                    <button>ADD TO CART <i class="fa-solid fa-cart-shopping"></i></button>
+                    <button (click)="addToCart(product._id)">ADD TO CART <i class="fa-solid fa-cart-shopping"></i></button>
                 </article>
            </div>
         </div>

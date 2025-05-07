@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Products } from '../../products';
 import { APIconnectionService } from '../../apiconnection.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { APIconnectionService } from '../../apiconnection.service';
 })
 export class DetailsPageComponent implements OnInit {
 
-  constructor(private https: APIconnectionService, public activeR: ActivatedRoute){
+  constructor(private https: APIconnectionService, public activeR: ActivatedRoute, private cookies : CookieService){
 
   }
   
@@ -25,6 +26,8 @@ export class DetailsPageComponent implements OnInit {
   public productDetails: Products = {} as Products;
   public slideIndex : number = 0;
   public stars: string[] = [];
+  Array = Array;
+  math = Math;
 
   getID(){
     this.activeR.params.subscribe((data:any) => this.productID = data.productID)
@@ -47,6 +50,40 @@ export class DetailsPageComponent implements OnInit {
     this.slideIndex--;
     if (this.slideIndex < 0) { 
       this.slideIndex = images.length - 1;
+    }
+  }
+
+  addToCart(productID : string){
+
+    if(this.cookies.get("userLogedIn")){
+      let itemToAdd = {
+        id: productID,
+        quantity: 1
+      }
+  
+      if(!this.cookies.get("cartID")){
+        this.https.addToCartItem(itemToAdd).subscribe({
+          next: (data: any) => {
+            console.log(data);
+          },
+          error: (err) => {
+            console.error('Error:', err);
+          }
+        });
+      }
+      else {
+        this.https.getProductQuantitiy(itemToAdd).subscribe({
+          next: (data: any) => {
+            console.log(data);
+          },
+          error: (err) => {
+            console.error('Error:', err);
+          }
+        })
+      }
+    }
+    else {
+      this.https.transferNoAccountToggle.next(true)
     }
   }
 

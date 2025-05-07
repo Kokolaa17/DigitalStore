@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable } from '@angular/core';
 import { MainProductsObject } from './main-products-object';
-import { Subject} from 'rxjs';
+import { BehaviorSubject, Subject} from 'rxjs';
 import { Products } from './products';
 import { Categorys } from './categorys';
 import { RegisterForm } from './register-form';
 import { LoginForm } from './login-form';
+import { UserInfo } from './user-info';
 
 
 @Injectable({
@@ -23,6 +24,8 @@ export class APIconnectionService {
   public transferProductsAll: Subject<MainProductsObject> = new Subject;
   public transferSignUpToggle: Subject<boolean> = new Subject;
   public transferLogInToggle: Subject<boolean> = new Subject;
+  public transferNoAccountToggle: Subject<boolean> = new Subject;
+  public transferCardProductsNumber: BehaviorSubject<number> = new BehaviorSubject(0);
 
   
   getBestSellers(){
@@ -71,5 +74,29 @@ export class APIconnectionService {
 
   logIn(body : LoginForm){
     return this.Http.post("https://api.everrest.educata.dev/auth/sign_in", body)
+  }
+
+  getUserPage(){
+    return this.Http.get<UserInfo>("https://api.everrest.educata.dev/auth")
+  }
+
+  getCart(){
+    return this.Http.get("https://api.everrest.educata.dev/shop/cart")
+  }
+
+  getProductQuantitiy(body : any){
+    return this.Http.patch("https://api.everrest.educata.dev/shop/cart/product", body)
+  }
+
+  addToCartItem(body: any) {
+    return this.Http.post("https://api.everrest.educata.dev/shop/cart/product", body)
+  }
+
+  checkOut(){
+    return this.Http.post("https://api.everrest.educata.dev/shop/cart/checkout", {})
+  }
+
+  deleteFromCart(body : any){
+    return this.Http.delete("https://api.everrest.educata.dev/shop/cart/product", body)
   }
 }

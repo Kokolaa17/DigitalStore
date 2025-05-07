@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { APIconnectionService } from '../../apiconnection.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-sign-in',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
 })
 export class SignInComponent {
-  constructor(private https : APIconnectionService){
+  constructor(private https : APIconnectionService, private cookies : CookieService){
 
   }
 
@@ -25,6 +27,7 @@ export class SignInComponent {
   logInAccount(){
     this.https.logIn(this.LogInForm.value).subscribe({
       next: (data : any) => {
+        this.cookies.set("userLogedIn", data.access_token)
         this.isLogedIn = true;
         setTimeout(() => {
           this.closeSignIn()

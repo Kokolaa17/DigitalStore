@@ -22,6 +22,9 @@ nav {
         justify-content: space-between;
         padding-inline: 50px;
         background-color: #fff;
+        .burgeri {
+            display: none;
+        }
     }
     h1 {
         font-size: 40px;
@@ -154,22 +157,6 @@ nav {
                 }
             }
         }
-         .burgerBarD {
-                display: flex;
-                align-items: center;
-                cursor: pointer;
-                font-size: 25px;
-                color: #5B32D6;
-                font-family: "Anton", sans-serif;
-                .burgerBar {
-                    font-size: 25px;
-                    color: #5B32D6;
-                    &:hover {
-                        transition: 0.3s;
-                        color: #2c02ab;
-                    }
-                }
-            }
     }
     .sideMenu {
         position: fixed;
@@ -189,6 +176,9 @@ nav {
             list-style: none;
             width: 90%;
             text-align: center;
+            .mobile-menu {
+                display: none;
+            }
             li {
                 font-size: 20px;
                 cursor: pointer;
@@ -202,4 +192,75 @@ nav {
             }
         }
     }
+    .logedin-menu {
+        ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            li {
+                font-family: "Roboto Flex", sans-serif;
+                font-weight: 300;
+                cursor: pointer;
+                font-size: 19px;
+                position: relative;
+                span {
+                    background-color: #e8e8e8;
+                    font-size: 11px;
+                    padding: 5px 10px;
+                    border-radius: 50%;
+                    position: absolute;
+                    bottom: 15px;
+                    left: 62px;
+                    font-weight: bold;
+                }
+            }
+        }
+     
+    }
 }
+
+.burgerBarD {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 25px;
+    color: #5B32D6;
+    font-family: "Anton", sans-serif;
+    .burgerBar {
+        font-size: 25px;
+        color: #5B32D6;
+        &:hover {
+            transition: 0.3s;
+            color: #2c02ab;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1220px) {
+    .burgeri {
+        display: unset !important;
+    }
+    .logedin-menu {
+        display: none;
+    }
+    .signIn-logIn {
+        display: none !important;
+    }
+    .mobile-menu {
+        display: unset !important;
+    }
+  }
+
+  @media screen and (max-width: 880px) {
+    .navigation {
+        flex-direction: column;
+        position: relative;
+        padding-bottom: 20px;
+        .burgeri {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+    }
+  }

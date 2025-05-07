@@ -1,0 +1,31 @@
+<section>
+    <div class="user-infos">
+
+        <article>
+            <img src="https://i.pinimg.com/474x/b3/0e/40/b30e401f0479b5eb7fcbedc38f82825c.jpg" alt="Giorgi Avatar">
+
+            <div class="left">
+                <div class="name-age">
+                    <h1>{{userInfo.firstName}} {{userInfo.lastName}}</h1>
+                    <p class="user-information"><span>Age:</span> {{userInfo.age}}</p>
+                </div>
+                <p class="user-information"><span>Email:</span> {{userInfo.email}}</p>
+                <p class="user-information"><span>Phone:</span> {{userInfo.phone}}</p>
+                <p class="user-information"><span>Gender: </span> 
+                    @if (userInfo.gender == "MALE") {
+                        <i class="fa-solid fa-mars"></i>
+                    }
+                    @else {
+                        <i class="fa-solid fa-venus"></i>
+                    }
+                </p>
+                <p class="user-information"><span>Address:</span> {{userInfo.address}}</p>
+                <p class="user-information"><span>Zipcode:</span> {{userInfo.zipcode}}</p>
+                <p class="user-information"><span>Role:</span> {{userInfo.role}}</p>
+                <p class="user-information"><span>UserID:</span> {{userInfo._id}}</p>
+                <p class="user-information"><span>CardID:</span> {{userInfo.cartID}}</p>
+            </div>
+        </article>
+
+    </div>
+</section>

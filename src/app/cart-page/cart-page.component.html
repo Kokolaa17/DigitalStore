@@ -1,0 +1,36 @@
+<section class="cart">
+    <table>
+        <tr class="cart-headers">
+            <th>Product</th>
+            <th>Product Info</th>
+            <th>In Stock</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    @for (product of cartProducts; track $index) {
+        <tr class="cart-item">
+            <td><img [src]="" alt=""></td>
+            <td class="item-info"><p><i style="color: rgb(255, 212, 59);" class="fa-solid fa-star"></i> {{product.pricePerQuantity}}<i style="color: #85BB65;" class="fa-solid fa-dollar-sign"></i></p></td>
+            <td>In stock: </td>
+            <td>
+                <div class="apply-quantity">
+                    <button (click)="decreaseQuantitiy(product.productId, product.quantity)">-</button>
+                    <input min="1" value="{{product.quantity}}">
+                    <button (click)="increaseQuantity(product.productId, product.quantity)">+</button>
+                </div>
+            </td>
+            <td>
+                <button (click)="deleteFromCart(products.productId)" class="remove-button">Remove <i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+            </td>
+        </tr>
+    }
+    </table>
+    <div class="cart-actions">
+        <div class="total-price">
+            <p>Total Price: {{totalPrice}}$</p> 
+        </div>
+       <div class="check-out">
+            <button (click)="checkOutProducts()"><i class="fa-solid fa-credit-card"></i> Check out</button>
+       </div>
+    </div>
+</section>

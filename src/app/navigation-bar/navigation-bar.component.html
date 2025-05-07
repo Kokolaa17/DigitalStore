@@ -21,23 +21,50 @@
             </div>
         </div>
 
-        <div class="signIn-logIn">
-            <div (click)="openSignUp()" class="userAction">
-                <i class="fa-regular fa-id-card"></i>
-                <p>Sign up</p>
+        @if (!cookies.get("userLogedIn")) {
+            <div class="signIn-logIn">
+                <div (click)="openSignUp()" class="userAction">
+                    <i class="fa-regular fa-id-card"></i>
+                    <p>Sign up</p>
+                </div>
+                <div (click)="openSignIn()" class="userAction">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <p>Log in</p>
+                </div>
+                <div #burgerBar class="burgerBarD">
+                    @if (!isMenuOpen) {
+                        <i (click)="openSideMenu()" class="fa-solid fa-bars-staggered"></i>
+                    }
+                    @else {
+                        <i (click)="openSideMenu()" class="fa-solid fa-x"></i>
+                    }
+                </div>
             </div>
-            <div (click)="openSignIn()" class="userAction">
-                <i class="fa-solid fa-circle-user"></i>
-                <p>Log in</p>
+        }
+        @else {
+            <div class="logedin-menu">
+                <ul>
+                    <li routerLink="userProfile">User</li>
+                    <li routerLink="cart">Cart <i class="fa-solid fa-cart-shopping"></i> <span>{{productsInCart}}</span></li>
+                    <li (click)="logOut()">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
+                    <div #burgerBar class="burgerBarD">
+                        @if (!isMenuOpen) {
+                            <i (click)="openSideMenu()" class="fa-solid fa-bars-staggered"></i>
+                        }
+                        @else {
+                            <i (click)="openSideMenu()" class="fa-solid fa-x"></i>
+                        }
+                    </div>
+                </ul>
             </div>
-            <div #burgerBar class="burgerBarD">
-                @if (!isMenuOpen) {
-                    <i (click)="openSideMenu()" class="fa-solid fa-bars-staggered"></i>
-                }
-                @else {
-                    <i (click)="openSideMenu()" class="fa-solid fa-x"></i>
-                }
-            </div>
+        }
+        <div #burgerBar class="burgerBarD burgeri">
+            @if (!isMenuOpen) {
+                <i (click)="openSideMenu()" class="fa-solid fa-bars-staggered"></i>
+            }
+            @else {
+                <i (click)="openSideMenu()" class="fa-solid fa-x"></i>
+            }
         </div>
     </div>
 
@@ -45,9 +72,18 @@
         <ul>
             <li routerLink="/" routerLinkActive="activeLink" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</li>
             <li routerLink="/orderPage" routerLinkActive="activeLink" (click)="closeMenu()">Shop</li>
-            <li (click)="closeMenu()">About</li>
+            @if (!cookies.get("userLogedIn")){
+                <li class="mobile-menu" (click)="openSignIn()">Log in  <i class="fa-solid fa-circle-user"></i></li>
+                <li class="mobile-menu" (click)="openSignUp()">Sign up <i class="fa-regular fa-id-card"></i></li>
+            }
+            @else {
+                <li class="mobile-menu" routerLink="userProfile">User</li>
+                <li class="mobile-menu" routerLink="cart">Cart <i class="fa-solid fa-cart-shopping"></i> <span></span></li>
+                <li class="mobile-menu" (click)="logOut()">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
+            }
         </ul>
     </div>
+
 </nav>
 
 @if (isSignUpOpen) {
@@ -56,6 +92,10 @@
 
 @if (isSignInOpen) {
     <app-sign-in></app-sign-in>
+}
+
+@if(isNoAccountOpen){
+    <app-no-account></app-no-account>
 }
 
 

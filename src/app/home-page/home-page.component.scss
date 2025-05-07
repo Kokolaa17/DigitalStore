@@ -222,3 +222,47 @@
         }
     }
 }
+
+@media screen and (max-width: 1060px) {
+    article {
+        left: 50px !important;
+        .welcome-h2 {
+            font-size: 50px !important;
+        }
+        button {
+            width: 80%;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    article {
+        left: 40px !important;
+        .welcome-h2 {
+            font-size: 40px !important;
+            max-width: 410px !important;
+        }
+        button {
+            width: 70%;
+        }
+    }
+}
+
+@media screen and (max-width: 885px) {
+    .welcome-section {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        margin-top: 185px !important;
+        article {
+            position: unset;
+            margin-bottom: 10px;
+            align-items: center;
+            text-align: center;
+            button {
+                padding: 10px;
+            }
+        }
+    }
+}
+
