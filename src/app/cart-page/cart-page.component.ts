@@ -23,6 +23,7 @@ export class CartPageComponent implements OnInit {
   public cartProducts: any;
   public totalPrice: string = ""
   public displayCart: Products[] = []
+  public producID : any;
 
 
   getCartProducts(){
@@ -32,6 +33,7 @@ export class CartPageComponent implements OnInit {
       this.cartProducts = data.products;
       this.totalPrice = data.total.price.current     
       this.https.transferCardProductsNumber.next(data.total.quantity)  
+      this.producID = data.products
     }
     })
   }

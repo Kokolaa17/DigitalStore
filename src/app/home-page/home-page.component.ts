@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
 Math: any;
 
   constructor(private https: APIconnectionService, private cookies : CookieService){
-   
+    this.getUserCart()
   }
   
   ngOnInit(): void {
@@ -34,6 +34,7 @@ Math: any;
 
   public indexOfImage: number = 0;
   public bestSellers: Products[] = []
+  public userHasCart: string = "";
   math = Math;
   Array = Array; 
   
@@ -54,6 +55,13 @@ Math: any;
     })
   }
 
+  getUserCart(){
+    this.https.getUserPage().subscribe({
+      next: (data : any) => this.userHasCart = data.cartID,
+      error: (data : any) => console.log(data)
+    })
+  }
+
   addToCart(productID : string){
 
     if(this.cookies.get("userLogedIn")){
@@ -62,14 +70,12 @@ Math: any;
         quantity: 1
       }
   
-      if(!this.cookies.get("cartID")){
+      if(!this.userHasCart){
         this.https.addToCartItem(itemToAdd).subscribe({
           next: (data: any) => {
             console.log(data);
           },
-          error: (err) => {
-            console.error('Error:', err);
-          }
+          error : (data: any) => console.log(data)
         });
       }
       else {
@@ -77,9 +83,7 @@ Math: any;
           next: (data: any) => {
             console.log(data);
           },
-          error: (err) => {
-            console.error('Error:', err);
-          }
+          error : (data: any) => console.log(data)
         })
       }
     }

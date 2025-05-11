@@ -26,6 +26,7 @@ export class DetailsPageComponent implements OnInit {
   public productDetails: Products = {} as Products;
   public slideIndex : number = 0;
   public stars: string[] = [];
+  public userHasCart: string = "";
   Array = Array;
   math = Math;
 
@@ -53,15 +54,23 @@ export class DetailsPageComponent implements OnInit {
     }
   }
 
+  getUserCart(){
+    this.https.getUserPage().subscribe({
+      next: (data : any) => this.userHasCart = data.cartID,
+      error: (data : any) => console.log(data)
+    })
+  }
+
   addToCart(productID : string){
 
     if(this.cookies.get("userLogedIn")){
+
       let itemToAdd = {
         id: productID,
         quantity: 1
       }
   
-      if(!this.cookies.get("cartID")){
+      if(this.userHasCart){
         this.https.addToCartItem(itemToAdd).subscribe({
           next: (data: any) => {
             console.log(data);
@@ -71,7 +80,7 @@ export class DetailsPageComponent implements OnInit {
           }
         });
       }
-      else {
+      else {  
         this.https.getProductQuantitiy(itemToAdd).subscribe({
           next: (data: any) => {
             console.log(data);

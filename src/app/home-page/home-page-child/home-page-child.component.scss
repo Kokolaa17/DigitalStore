@@ -37,12 +37,14 @@
         }
         svg {
             width: 70px;
+            animation: fromBackRotate 1s;
         }
         p {
             font-size: 20px;
             font-family: "Roboto Flex", sans-serif;
             max-width: 100px;
             font-weight: 600;
+            animation: fromBack 1s;
         }
     }
 }

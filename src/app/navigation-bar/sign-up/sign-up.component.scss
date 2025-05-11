@@ -177,3 +177,13 @@ section {
 input.ng-invalid.ng-dirty {
     border: 2px solid red !important;
 }
+
+@media (max-width: 1080px){
+    .account-creation {
+        width: 90% !important;
+        height: 80% !important;
+        ul {
+            display: none;
+        }
+    }
+}

@@ -55,15 +55,20 @@ export class AsideSectionComponent implements OnInit  {
       { name: 'price', icon: this.icon4, element: this.priceFilter }
     ];
   
-    sections.forEach(s => {
-      const isTarget = s.name === section;
-      s.icon.nativeElement.textContent = isTarget
-        ? (s.icon.nativeElement.textContent === '+' ? '-' : '+')
-        : '+';
-      s.element.nativeElement.style.display = isTarget
-        ? (s.icon.nativeElement.textContent === '-' ? 'flex' : 'none')
-        : 'none';
+    sections.forEach(categories => {
+      const isTarget = categories.name === section;
+    
+      if (isTarget) {
+        const isOpen = categories.icon.nativeElement.textContent === '+';
+        categories.icon.nativeElement.textContent = isOpen ? '-' : '+';
+        categories.element.nativeElement.style.display = isOpen ? 'flex' : 'none';
+
+      } else {
+        categories.icon.nativeElement.textContent = '+';
+        categories.element.nativeElement.style.display = 'none';
+      }
     });
+
     this.togglePriceWarning()
   }
 
@@ -128,7 +133,21 @@ getAllProducts(pageIndex : number, pageProductsSize: string ){
     },
     error: (error) => console.log(error)
   })
-  
+
+  const sections = [
+    { icon: this.icon1, element: this.categories },
+    { icon: this.icon2, element: this.brands },
+    { icon: this.icon3, element: this.ratings },
+    { icon: this.icon4, element: this.priceFilter }
+  ];
+
+  sections.forEach(section => {
+    section.icon.nativeElement.textContent = '+';
+    section.element.nativeElement.style.display = 'none';
+  });
+
+  this.togglePriceWarning()
 }
+
 
 }

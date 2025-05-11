@@ -4,6 +4,7 @@ aside {
     position: sticky;
     top: 110px;
     left: 0px;
+    animation: fromLeft 1s;
     h2 {
         font-family: "Roboto Flex", sans-serif;
         font-size: 20px;
@@ -191,6 +192,7 @@ aside {
         width: 100% !important;
         padding-inline: 50px;
         margin-bottom: 50px;
+        animation: fromBack 1s !important;
         h2 {
             text-align: center;
             width: 100%;

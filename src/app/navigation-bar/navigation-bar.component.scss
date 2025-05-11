@@ -7,6 +7,7 @@ nav {
     .commerical {
         text-align: center;
         background-color: #010101;
+        overflow: hidden;
         h5 {
             font-family: "Anton", sans-serif;
             color: #a6a2a2;
@@ -14,6 +15,7 @@ nav {
             padding: 7px;
             letter-spacing: 4px;
             font-weight: 400;
+            animation: fromTop 1s;
         }
     }
     .navigation {
@@ -33,6 +35,7 @@ nav {
         padding: 8px 0px;
         cursor: pointer;
         position: relative;
+        animation: fromLeft 1s;
         span {
             color: #5B32D6;
         }
@@ -76,6 +79,7 @@ nav {
         border-radius: 30px;
         align-items: center;
         position: relative;
+        animation: fromBack 1s;
         input {
             width: 0;
             outline: none;
@@ -141,6 +145,7 @@ nav {
         display: flex;
         gap: 20px;
         align-items: center;
+        animation: fromRight 1s;
         .userAction {
             display: flex;
             gap: 5px;
@@ -197,6 +202,7 @@ nav {
             display: flex;
             gap: 40px;
             list-style: none;
+            animation: fromRight 1s;
             li {
                 font-family: "Roboto Flex", sans-serif;
                 font-weight: 300;
@@ -240,6 +246,7 @@ nav {
 @media screen and (max-width: 1220px) {
     .burgeri {
         display: unset !important;
+        animation: fromRight 1s;
     }
     .logedin-menu {
         display: none;
@@ -257,6 +264,9 @@ nav {
         flex-direction: column;
         position: relative;
         padding-bottom: 20px;
+        h1 {
+            animation: fromBack 1s !important;
+        }
         .burgeri {
             position: absolute;
             top: 20px;

@@ -17,6 +17,7 @@
             <div  class="image-container">
               <img routerLink="/orderPage/detailsPage/{{product._id}}"  [src]="product.thumbnail" alt="Modern Laptop">
             </div>
+            <h5 [style.backgroundColor]="product.stock <= 0 ? 'red' : 'green'">{{product.stock <= 0 ? "Not in stock" : `In stock: ${product.stock}`}}</h5>
            <div class="content">
                 <article>
                     <p>{{product.price.current}}$<span>{{product.price.beforeDiscount == product.price.current ? "": `${product.price.beforeDiscount}$`}}</span></p>
@@ -26,12 +27,18 @@
                             <i class="fa-solid fa-star"></i>
                           }
                     </div>
-                    <button (click)="addToCart(product._id)">ADD TO CART <i class="fa-solid fa-cart-shopping"></i></button>
+                    <button 
+                        [style.backgroundColor]="product.stock <= 0 ? 'rgba(1, 1, 1, 0.68)' : '#010101'"  
+                        [style.pointerEvents]="product.stock <= 0 ? 'none' : 'auto'"
+                        [disabled]="product.stock <= 0"
+                        (click)="addToCart(product._id)">ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
                 </article>
            </div>
         </div>
     }
 </section>
+
 
 
 <app-home-page-child></app-home-page-child>

@@ -35,7 +35,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public productPages: number[] = [];
   public pageProductsSize: string = "9";
   public detailsPage: Products = {} as Products; 
+  public userHasCart: string = "";
   @ViewChild("pageIndicators") public pageIndicators!: ElementRef;
+  Array = Array;
+  math = Math;
 
 
   getAllProducts(pageIndex : number, pageProductsSize: string ){
@@ -56,8 +59,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
        
       },
       error: (error) => console.log(error)
-    })
-    
+    }) 
   }
 
   displaySearchedProducts(){
@@ -116,6 +118,13 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     })
   }
 
+  getUserCart(){
+    this.https.getUserPage().subscribe({
+      next: (data : any) => this.userHasCart = data.cartID,
+      error: (data : any) => console.log(data)
+    })
+  }
+
   addToCart(productID : string){
 
     if(this.cookies.get("userLogedIn")){
@@ -125,7 +134,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         quantity: 1
       }
   
-      if(!this.cookies.get("cartID")){
+      if(this.userHasCart){
         this.https.addToCartItem(itemToAdd).subscribe({
           next: (data: any) => {
             console.log(data);

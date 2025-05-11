@@ -4,6 +4,7 @@
     padding-inline: 50px;
     display: flex;
     justify-content: center;
+    overflow: hidden;
     align-items: center;
     .left-image {
         width: 40%;
@@ -12,8 +13,8 @@
         object-fit: contain;
         border-radius: 8px;
         border: 2px solid #E8E8E8;
-        padding: 10px;
         position: relative;
+        animation: fromLeft 1s;
         h5 {
             position: absolute;
             right: 0px;
@@ -88,6 +89,7 @@
             padding: 0px 30px 0px 30px;
             position: relative;
             font-family: "Roboto Slab", serif;
+            animation: fromRight 1s;
             h1 {
                 font-weight: bold;
                 font-size: 35px;

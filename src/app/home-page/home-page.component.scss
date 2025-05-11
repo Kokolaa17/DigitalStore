@@ -2,8 +2,10 @@
     margin: 0 auto;
     margin-top: 130px;
     position: relative;
+    overflow: hidden;
     img {
         width: 100%;
+        animation: fromBottom 1s;
     }
     article {
         position: absolute;
@@ -14,6 +16,7 @@
         justify-content: center;
         top: 0;
         left: 130px;
+        animation: fromLeft 1s;
         span {
             background-color: #d72D2D;
             color: #fff;
@@ -23,6 +26,7 @@
             width: fit-content;
             box-shadow: 0px 0px 15px #d72D2D;
             animation: float 3s infinite;
+            animation-delay: 1s;
         }
         h2 {
             font-size: 60px;
@@ -45,7 +49,6 @@
             font-weight: 600;
             cursor: pointer;
             overflow: hidden;
-            
             i {
                 color: #fff;
                 transform: translateX(250px);
@@ -72,6 +75,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: fromBack 1s;
     &::before {
         position: absolute;
         content: "";
@@ -95,6 +99,7 @@
 
 .best-sellers {
     max-width: 1440px;
+    min-height: 1000px;
     margin: 0 auto;
     background-color: #E8E8E8;
     padding: 20px;
@@ -111,6 +116,12 @@
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        animation: fromBack 1s;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover { 
+           transform: translateY(-5px);
+        }
         .image-container {
             height: 280px;
             overflow: hidden;
@@ -125,9 +136,20 @@
                 max-width: 95%;
                 max-height: 95%;
                 object-fit: contain;
-                transition: transform 0.5s ease;
+                transition: 0.3s;
                 cursor: pointer;
+                &:hover {
+                    scale: 1.1;
+                }
             }
+        }
+        h5 {
+            position: absolute;
+            top: 258px;
+            left: 0px;
+            padding: 3px 6px;
+            color: #fff;
+            border-top-right-radius: 12px;
         }
         .content {
             padding: 20px;
@@ -256,9 +278,10 @@
         margin-top: 185px !important;
         article {
             position: unset;
-            margin-bottom: 10px;
             align-items: center;
             text-align: center;
+            padding: 20px;
+            animation: fromBack 1s;
             button {
                 padding: 10px;
             }

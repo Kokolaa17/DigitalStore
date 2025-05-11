@@ -38,7 +38,13 @@
                 <li>Issue Date: {{productDetails.issueDate.split("T")[0]}}</li>
             </ul>
             <div class="addToCart">
-                <button (click)="addToCart(productDetails._id)" id="cartAdder" onclick="buttonCartAdder('6527daf557e3ec956179e73d', 0)">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
+                <button 
+                    (click)="addToCart(productDetails._id)"  
+                    [style.backgroundColor]="productDetails.stock <= 0 ? 'rgba(1, 1, 1, 0.68)' : '#010101'"  
+                    [style.pointerEvents]="productDetails.stock <= 0 ? 'none' : 'auto'"
+                    [disabled]="productDetails.stock <= 0">
+                    Add to cart <i class="fa-solid fa-cart-shopping"></i>
+                </button>
             </div>
         </article>
     </div>

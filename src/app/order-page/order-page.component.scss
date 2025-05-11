@@ -6,6 +6,8 @@
     align-items: center;
     font-family: "Roboto Slab", serif;
     font-size: 17px;
+    overflow: hidden;
+    animation: fromLeft 1s;
     p {
         cursor: pointer;
     }
@@ -29,6 +31,7 @@
             align-items: center;
             justify-content: center;
             gap: 30px;
+            min-height: 50vh;
             .card {
                 position: relative;
                 width: 340px;
@@ -37,6 +40,12 @@
                 border-radius: 16px;
                 overflow: hidden;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+                transition: 0.3s;
+                cursor: pointer;
+                animation: fromBack 1s;
+                &:hover { 
+                   transform: translateY(-5px);
+                }
                 .image-container {
                     height: 280px;
                     overflow: hidden;
@@ -52,7 +61,19 @@
                         object-fit: contain;
                         transition: transform 0.5s ease;
                         cursor: pointer;
+                        transition: 0.3s;
+                        &:hover {
+                            scale: 1.1;
+                        }
                     }
+                }
+                h5 {
+                    position: absolute;
+                    top: 258px;
+                    left: 0px;
+                    padding: 3px 6px;
+                    color: #fff;
+                    border-top-right-radius: 12px;
                 }
                 .content {
                     padding: 20px;
@@ -154,6 +175,7 @@
            align-items: center;
            justify-content: center;
            position: relative;
+           animation: fromBack 1s;
             .route-pages {
                 display: flex;
                 gap: 20px;
