@@ -22,14 +22,26 @@
             </td>
         </tr>
     }
+    @empty {
+        <img src="https://onlinerestaurant-seven.vercel.app/assets/emptycart.png" alt="">
+    }
     </table>
     <div class="cart-actions">
         <div class="total-price">
             <p>Total Price: {{totalPrice}}$</p> 
-            <button (click)="deleteCart()">Delete Cart <i class="fa-solid fa-cart-shopping"></i></button>
+            <button [style.cursor]="totalPrice == '0' ? 'not-allowed' : 'pointer'" [disabled]="totalPrice == '0'" (click)="deleteCart()">Reset Cart <i class="fa-solid fa-cart-shopping"></i></button>
         </div>
        <div class="check-out">
-            <button (click)="checkOutProducts()"><i class="fa-solid fa-credit-card"></i> Check out</button>
+            <button [style.cursor]="totalPrice == '0' ? 'not-allowed' : 'pointer'" [disabled]="totalPrice == '0'" (click)="checkOutProducts()"><i class="fa-solid fa-credit-card"></i> Check out</button>
        </div>
     </div>
 </section>
+
+@if (displayCheckoutMessage) {
+    <section class="display-notify">
+        <div class="notify">
+            <p>{{checkoutMessage}}</p>
+            <i class="fa-solid fa-truck-fast"></i>
+        </div>
+    </section>
+}

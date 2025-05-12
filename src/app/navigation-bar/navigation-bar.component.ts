@@ -33,7 +33,7 @@ export class NavigationBarComponent implements OnInit{
         this.getUser();
       }
     }, 1);
-    
+    this.getInCartNumber()
   }
 
   public searchWord: string = "";
@@ -140,6 +140,9 @@ export class NavigationBarComponent implements OnInit{
     })
   }
 
+  getInCartNumber(){
+    this.https.transferInCartNumber.subscribe((data : number) => this.getCartNumber = data)
+  }
   
 
   loaderLogic() {

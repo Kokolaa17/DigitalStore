@@ -45,7 +45,7 @@
             <div class="logedin-menu">
                 <ul>
                     <li routerLink="userProfile" class="userProfile">{{userFirstaName}} <img [src]="avatar" alt="{{userFirstaName}} image"></li>
-                    <li routerLink="cart">Cart <i class="fa-solid fa-cart-shopping"></i> <span>{{getCartNumber}}</span></li>
+                    <li routerLink="cart">Cart <i class="fa-solid fa-cart-shopping"></i> <span [style.display]="getCartNumber == 0 ? 'none' : 'inline'">{{getCartNumber}}</span></li>
                     <li (click)="logOut()">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
                     <div #burgerBar class="burgerBarD">
                         @if (!isMenuOpen) {

@@ -92,8 +92,8 @@ export class DetailsPageComponent implements OnInit {
         } else {
           this.https.getProductQuantitiy(itemToAdd).subscribe({
             next: (data: any) => {
-              console.log(data)
               this.addedToCart = true;
+              this.https.transferInCartNumber.next(data.total.quantity)
               setTimeout(() => {
                 this.addedToCart = false
               }, 1500);

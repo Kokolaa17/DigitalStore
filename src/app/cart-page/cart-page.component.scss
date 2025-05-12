@@ -49,11 +49,6 @@
             }
             img {
                 width: 80px;
-                 &:hover {
-                    transition: 0.3s;
-                    scale: 1.1;
-                    cursor: pointer;
-                 }
             }
             .apply-quantity {
                 display: flex;
@@ -119,7 +114,9 @@
         position: absolute;
         bottom: 0;
         width: 100%;
+        overflow: hidden;
         .check-out {     
+            animation: fromBottom 1s;
             button {
                 width: 100%;
                 padding: 10px;
@@ -146,8 +143,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            overflow: hidden;
             p {
                 font-size: 18px;
+                animation: fromLeft 1s;
             }
             button {
                 background-color: red;
@@ -156,6 +155,7 @@
                 padding: 6px 15px;
                 border-radius: 5px;
                 cursor: pointer;
+                animation: fromRight 1s;
                 &:hover {
                     transition: 0.3s;
                     background-color: rgb(255, 24, 24);
@@ -168,6 +168,39 @@
             }
         }
        
+    }
+}
+
+.display-notify {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-backdrop-filter: blur(10px) brightness(50%);
+    backdrop-filter: blur(10px) brightness(50%);
+    z-index: 10;
+    transition: 0.3s;
+    .notify {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        p {
+            color: #fff;
+            font-size: 20px;
+            text-align: center;
+         }
+        i {
+            margin-top: 30px;
+            color: #fff;
+            font-size: 100px;
+            animation: fromLeft 0.5s;
+        }
     }
 }
 

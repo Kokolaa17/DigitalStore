@@ -166,6 +166,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
           this.https.getProductQuantitiy(itemToAdd).subscribe({
             next: (data: any) => {
               this.addedToCart = true;
+              this.https.transferInCartNumber.next(data.total.quantity)
               setTimeout(() => {
                 this.addedToCart = false
               }, 1500);

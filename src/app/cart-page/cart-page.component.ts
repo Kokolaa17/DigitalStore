@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { APIconnectionService } from '../apiconnection.service';
 import { Products } from '../products';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,19 +13,25 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class CartPageComponent implements OnInit {
 
-  constructor(private https : APIconnectionService){
+  constructor(private https : APIconnectionService, public route : Router){
     this.getCartProducts()
   }
 
   ngOnInit(): void {
-   
+    this.getNumberCart()
   }
 
   public products : any;
   public cartProducts: any;
-  public totalPrice: string = ""
+  public totalPrice: string = "0"
   public displayCart: Products[] = []
   public inCartNumber: number = 0
+  public displayCheckoutMessage: boolean = false;
+  public checkoutMessage: string = ""
+  
+  getNumberCart(){
+    this.https.transferInCartNumber.next(this.inCartNumber)
+  }
 
 
   getCartProducts(){
@@ -34,7 +41,7 @@ export class CartPageComponent implements OnInit {
       this.cartProducts = data.products;
       this.totalPrice = data.total.price.current     
       this.inCartNumber = data.total.quantity
-      console.log(this.inCartNumber);
+      this.getNumberCart()
     }
     })
   }
@@ -57,9 +64,9 @@ export class CartPageComponent implements OnInit {
         this.cartProducts = data.products;
         this.totalPrice = data.total.price.current      
         this.inCartNumber = data.total.quantity
+        this.getNumberCart()
       }
     })
-    console.log(this.inCartNumber);
   }
 
   increaseQuantity(productID : string, quantity : number){
@@ -79,14 +86,13 @@ export class CartPageComponent implements OnInit {
         this.products = data;
         this.cartProducts = data.products;
         this.totalPrice = data.total.price.current     
-        this.inCartNumber = data.total.quantity       
+        this.inCartNumber = data.total.quantity     
+        this.getNumberCart()  
       }
     })
-    console.log(this.inCartNumber);
   }
 
   deleteFromCart(productID : string){
-    console.log(productID)
 
     const deleteThisProduct = {
       id: productID
@@ -98,20 +104,32 @@ export class CartPageComponent implements OnInit {
         this.cartProducts = data.products;
         this.totalPrice = data.total.price.current 
         this.inCartNumber = data.total.quantity    
+        this.getNumberCart()
       },
       error: (data: any) => ''
     })
-    console.log(this.inCartNumber);
   }
 
   deleteCart(){
-    this.https.deleteCart().subscribe((data : any) => console.log(data))
+    this.https.deleteCart().subscribe((data : any) => {
+      console.log(data)
+       if(data.success){
+        this.route.navigate(["/orderPage"])
+    }
+    })
   }
 
 
   checkOutProducts(){
     this.https.checkOut().subscribe({
-      next: (data : any) => console.log(data)
+      next: (data : any) => {
+        this.checkoutMessage = data.message.split("cleared")[0] + "cleared."
+        this.displayCheckoutMessage = data.success
+        setTimeout(() => {
+          this.displayCheckoutMessage = false
+          this.route.navigate(["/orderPage"])
+        }, 2000);
+      }
     })
   }
 }

@@ -26,7 +26,8 @@ export class APIconnectionService {
   public transferLogInToggle: Subject<boolean> = new Subject;
   public transferNoAccountToggle: Subject<boolean> = new Subject;
   public transferPageIndex: BehaviorSubject<number> = new BehaviorSubject(1);
-  public loaderLogic: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public loaderLogic: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public transferInCartNumber: Subject<number> = new Subject;
 
   startLoading() {
     this.loaderLogic.next(true)
