@@ -3,7 +3,12 @@
         <h5>FREE SHIPPING WORLDWIDE</h5>
     </div>
     <div class="navigation">
-        <h1 routerLink="/">Digital<p>Store<p><span [style.display]="loading ? 'block' : 'none'" class="loader"></span></h1>
+        <div class="header">
+            <h1 routerLink="/">Digital<p>Store<p></h1>
+            @if (loading) {
+                <span class="loader"></span>
+            }
+        </div>
 
         <div class="search">
             <input #searchBar type="text" placeholder="Search..." [(ngModel)]="searchWord" (keyup)="searchProduct(searchWord)" (keyup.enter)="displaySearchedProductsDown()"  (focus)="searchAppear()" (input)="searchProduct(searchWord); searchAppear()" (blur)="hideResultsWithDelay()">
@@ -46,7 +51,7 @@
                 <ul>
                     <li routerLink="userProfile" class="userProfile">{{userFirstaName}} <img [src]="avatar" alt="{{userFirstaName}} image"></li>
                     <li routerLink="cart">Cart <i class="fa-solid fa-cart-shopping"></i> <span [style.display]="getCartNumber == 0 ? 'none' : 'inline'">{{getCartNumber}}</span></li>
-                    <li (click)="logOut()">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
+                    <li class="mobile-menu" (click)="logOut()">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
                     <div #burgerBar class="burgerBarD">
                         @if (!isMenuOpen) {
                             <i (click)="openSideMenu()" class="fa-solid fa-bars-staggered"></i>

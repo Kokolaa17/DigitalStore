@@ -186,6 +186,28 @@ aside {
         font-size: 15px;
     }   
 }
+.selected {
+    color: #5B32D6;
+    box-shadow: 0px 0px 5px #5B32D6;
+    i {
+        color: yellow !important;
+    }
+}
+
+.selectedBrand {
+    i {
+        color: #010101 !important;
+        color: #5B32D6;
+        text-shadow: 0px 0px 5px #5B32D6;
+    }
+}
+
+.selectedRating {
+    i {
+        color: gold !important;
+        text-shadow: 0px 0px 15px gold;
+    }
+}
 
 @media screen and (max-width: 800px) {
     aside {

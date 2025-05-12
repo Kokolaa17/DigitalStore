@@ -4,31 +4,31 @@
         <h3 (click)="toggleSection('categories')"> Category <span #openClose1>+</span></h3>
         <div #categories class="categorys">
            @for (category of displayCategorys; track $index) {
-            <button #choosenCategory (click)="getByCategory(category.id)"><img [src]="category.image" [alt]="category.name"><span>{{category.name}}</span></button>
+            <button [class.selected]="selectedCategoryId === category.id" (click)="getByCategory(category.id)"><img [src]="category.image" [alt]="category.name"><span>{{category.name}}</span></button>
            }
         </div>
         <h3 (click)="toggleSection('brands')">Brand <span  #openClose2>+</span></h3>
         <ul #brands class="brands">
             @for (brand of displayBrands; track $index) {
-                <li (click)="getByBrand(brand)"><i class="fa-solid fa-tag"></i> <p>{{brand}}</p></li>
+                <li [class.selectedBrand]="selectedBrand === brand" (click)="getByBrand(brand)"><i class="fa-solid fa-tag"></i> <p>{{brand}}</p></li>
             }
         </ul>
         <h3 (click)="toggleSection('ratings')"> Rating <span #openClose3>+</span></h3>
         <div #ratings class="ratings">
             <div class="star">
-              <p (click)="filterByStar(`4.5`)"><i class="fa-solid fa-star"></i> 5 Only</p>
+              <p [class.selectedRating]="selectedRating === '4.5' " (click)="filterByStar(`4.5`)"><i class="fa-solid fa-star"></i> 5 Only</p>
             </div>
             <div class="star">
-              <p (click)="filterByStar(`3.5`)"><i class="fa-solid fa-star"></i> 4 And up</p>
+              <p [class.selectedRating]="selectedRating === '3.5' " (click)="filterByStar(`3.5`)"><i class="fa-solid fa-star"></i> 4 And up</p>
             </div>
             <div class="star">
-              <p (click)="filterByStar(`2.5`)"><i class="fa-solid fa-star"></i> 3 And up</p>
+              <p [class.selectedRating]="selectedRating === '2.5' " (click)="filterByStar(`2.5`)"><i class="fa-solid fa-star"></i> 3 And up</p>
             </div>
             <div class="star">
-              <p (click)="filterByStar(`1.5`)"><i class="fa-solid fa-star"></i> 2 And up</p>
+              <p [class.selectedRating]="selectedRating === '1.5' " (click)="filterByStar(`1.5`)"><i class="fa-solid fa-star"></i> 2 And up</p>
             </div>
             <div class="star">
-              <p (click)="filterByStar(`1`)"><i class="fa-solid fa-star"></i> 1 And up</p>
+              <p [class.selectedRating]="selectedRating === '1' " (click)="filterByStar(`1`)"><i class="fa-solid fa-star"></i> 1 And up</p>
             </div>
           </div>
         <h3 (click)="toggleSection('price')">Price <span #openClose4>+</span></h3>
@@ -36,11 +36,11 @@
               <div class="price-inputs">
                   <div class="min-price">
                       <p>Min:</p>
-                      <input placeholder="50$" id="minRange" type="number" [(ngModel)]="minPrice">
+                      <input placeholder="50$" id="minRange" type="number" [(ngModel)]="minPrice" min="0" max="8000">
                   </div>
                   <div class="max-price">
                       <p>Max:</p>
-                      <input placeholder="8000$" id="maxRange" type="number" [(ngModel)]="maxPrice">
+                      <input placeholder="8000$" id="maxRange" type="number" [(ngModel)]="maxPrice" min="0" max="8000">
                   </div>
               </div>
               <button [style.cursor]="minPrice > maxPrice || minPrice == '0' ? 'not-allowed' : 'pointer'" [disabled]="minPrice > maxPrice || minPrice == '0'" (click)="applyPriceFilter(this.minPrice, this.maxPrice)">Apply Filter</button>

@@ -112,7 +112,6 @@ export class CartPageComponent implements OnInit {
 
   deleteCart(){
     this.https.deleteCart().subscribe((data : any) => {
-      console.log(data)
        if(data.success){
         this.route.navigate(["/orderPage"])
     }

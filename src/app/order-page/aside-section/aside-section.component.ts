@@ -42,6 +42,10 @@ export class AsideSectionComponent implements OnInit  {
 
   public filteredProducts: MainProductsObject = {} as MainProductsObject;
   public pageIndex: number = 1;
+
+  selectedCategoryId: string | null = null;
+  selectedBrand: string | null = null;
+  selectedRating: string | null = null;
   
 
 
@@ -88,6 +92,9 @@ export class AsideSectionComponent implements OnInit  {
   }
 
   getByCategory(CategoryID: string){
+    this.selectedBrand = null
+    this.selectedRating = null
+    this.selectedCategoryId = CategoryID;
     this.https.getProductByCategorys(CategoryID).subscribe({
       next: (data : MainProductsObject) => {
         this.filteredProducts = data
@@ -97,6 +104,9 @@ export class AsideSectionComponent implements OnInit  {
   }
 
   getByBrand(brandName : string){
+    this.selectedRating = null
+    this.selectedCategoryId = null
+    this.selectedBrand = brandName;
     this.https.getByBrands(brandName).subscribe({
       next: (data: MainProductsObject) => {
         this.filteredProducts = data
@@ -106,6 +116,9 @@ export class AsideSectionComponent implements OnInit  {
   }
 
  filterByStar(StarNum : string){
+  this.selectedCategoryId = null
+  this.selectedBrand = null;
+  this.selectedRating = StarNum;
   this.https.getByStars(StarNum).subscribe({
     next: (data: MainProductsObject) => {
       this.filteredProducts = data
@@ -115,6 +128,9 @@ export class AsideSectionComponent implements OnInit  {
  }
 
  applyPriceFilter(minPrice: string, maxPrice: string){
+    this.selectedRating = null
+    this.selectedCategoryId = null
+    this.selectedBrand = null;
   this.https.getByPrice(minPrice, maxPrice).subscribe({
     next: (data: MainProductsObject) => {
       this.filteredProducts = data
@@ -128,6 +144,9 @@ export class AsideSectionComponent implements OnInit  {
 }
 
 getAllProducts(pageIndex : number, pageProductsSize: string ){
+    this.selectedRating = null
+    this.selectedCategoryId = null
+    this.selectedBrand = null;
   this.https.getAllProducts(pageIndex, pageProductsSize).subscribe({
     next: (data:MainProductsObject) => {
       this.https.transferProductsAll.next(data)

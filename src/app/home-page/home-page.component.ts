@@ -77,7 +77,7 @@ Math: any;
       if(!this.userHasCart){
         this.https.addToCartItem(itemToAdd).subscribe({
           next: (data: any) => {
-            console.log(data);
+           
           },
           error : (data: any) => console.log(data)
         });
@@ -85,7 +85,7 @@ Math: any;
       else {
         this.https.getProductQuantitiy(itemToAdd).subscribe({
           next: (data: any) => {
-            console.log(data);
+            
           },
           error : (data: any) => console.log(data)
         })
