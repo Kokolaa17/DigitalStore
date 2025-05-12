@@ -38,7 +38,7 @@
         <div class="products-number" #pageIndicators> 
            <div class="route-pages">
                 @for (page of productPages; track $index) {
-                    <button (click)="getAllProducts(page, pageProductsSize)">{{page}}</button>
+                    <button (click)="selectPage(page)"  [class.activePage]="page === currentPage">{{page}}</button>
                 }
            </div>
 
@@ -63,3 +63,7 @@
        
     </main>
 </section>
+
+@if (addedToCart) {
+    <app-add-to-cart-notify></app-add-to-cart-notify>
+}

@@ -36,8 +36,74 @@ nav {
         cursor: pointer;
         position: relative;
         animation: fromLeft 1s;
-        span {
+        .loader {
             color: #5B32D6;
+            font-size: 5px;
+            width: 5px;
+            height: 1em;
+            border-radius: 50%;
+            position: relative;
+            text-indent: -9999em;
+            animation: _ngcontent-ng-c1948339714_mulShdSpin 1.3s infinite linear;
+            transform: translateZ(0);
+            display: block;
+            position: absolute;
+            right: -40px;
+            top: 40px;
+            }
+
+            @keyframes mulShdSpin {
+            0%,
+            100% {
+                box-shadow: 0 -3em 0 0.2em, 
+                2em -2em 0 0em, 3em 0 0 -1em, 
+                2em 2em 0 -1em, 0 3em 0 -1em, 
+                -2em 2em 0 -1em, -3em 0 0 -1em, 
+                -2em -2em 0 0;
+            }
+            12.5% {
+                box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 
+                3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, 
+                -2em 2em 0 -1em, -3em 0 0 -1em, 
+                -2em -2em 0 -1em;
+            }
+            25% {
+                box-shadow: 0 -3em 0 -0.5em, 
+                2em -2em 0 0, 3em 0 0 0.2em, 
+                2em 2em 0 0, 0 3em 0 -1em, 
+                -2em 2em 0 -1em, -3em 0 0 -1em, 
+                -2em -2em 0 -1em;
+            }
+            37.5% {
+                box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+                3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, 
+                -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+            }
+            50% {
+                box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+                3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, 
+                -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+            }
+            62.5% {
+                box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+                3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, 
+                -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+            }
+            75% {
+                box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 
+                3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, 
+                -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+            }
+            87.5% {
+                box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 
+                3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, 
+                -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+            }
+            }
+            
+        p {
+            color: #5B32D6;
+            display: inline;
         }
         &::after {
             content: "";
@@ -181,6 +247,21 @@ nav {
             list-style: none;
             width: 90%;
             text-align: center;
+            .userProfile {
+                display: none;
+                align-items: center;
+                justify-content: center;
+                img {
+                    height: 35px;
+                    width: 33px;
+                    border-radius: 20px;
+                    margin-left: 10px;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    -o-object-position: bottom;
+                    object-position: bottom;
+                }
+            }
             .mobile-menu {
                 display: none;
             }
@@ -203,12 +284,26 @@ nav {
             gap: 40px;
             list-style: none;
             animation: fromRight 1s;
+            .userProfile {
+                img {
+                    height: 35px;
+                    width: 33px;
+                    border-radius: 20px;
+                    margin-left: 10px;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    -o-object-position: bottom;
+                    object-position: bottom;
+                }
+            }
             li {
                 font-family: "Roboto Flex", sans-serif;
                 font-weight: 300;
                 cursor: pointer;
                 font-size: 19px;
                 position: relative;
+                display: flex;
+                align-items: center;
                 span {
                     background-color: #e8e8e8;
                     font-size: 11px;
@@ -243,6 +338,9 @@ nav {
 }
 
 
+  
+
+
 @media screen and (max-width: 1220px) {
     .burgeri {
         display: unset !important;
@@ -256,6 +354,11 @@ nav {
     }
     .mobile-menu {
         display: unset !important;
+    }
+    .sideMenu {
+         .userProfile {
+            display: flex !important;
+        }
     }
   }
 

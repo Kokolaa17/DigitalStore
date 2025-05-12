@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Products } from '../../products';
 import { APIconnectionService } from '../../apiconnection.service';
 import { CookieService } from 'ngx-cookie-service';
+import { UserInfo } from '../../user-info';
+import { AddToCartNotifyComponent } from "../../add-to-cart-notify/add-to-cart-notify.component";
 
 
 @Component({
   selector: 'app-details-page',
-  imports: [RouterModule],
+  imports: [RouterModule, AddToCartNotifyComponent],
   templateUrl: './details-page.component.html',
   styleUrl: './details-page.component.scss'
 })
@@ -27,6 +29,7 @@ export class DetailsPageComponent implements OnInit {
   public slideIndex : number = 0;
   public stars: string[] = [];
   public userHasCart: string = "";
+  public addedToCart : boolean = false;
   Array = Array;
   math = Math;
 
@@ -55,45 +58,66 @@ export class DetailsPageComponent implements OnInit {
   }
 
   getUserCart(){
+      this.https.getUserPage().subscribe({
+          next: (data : UserInfo) => this.userHasCart = data.cartID
+        })
+    }
+  
+  addToCart(productID: string) {
+    if (!this.cookies.get("userLogedIn")) {
+      this.https.transferNoAccountToggle.next(true);
+      return;
+    }
+
     this.https.getUserPage().subscribe({
-      next: (data : any) => this.userHasCart = data.cartID,
-      error: (data : any) => console.log(data)
-    })
+      next: (data: UserInfo) => {
+        this.userHasCart = data.cartID;
+
+        let itemToAdd = {
+          id: productID,
+          quantity: 1
+        };
+
+        if (this.userHasCart === "") {
+          this.https.addToCartItem(itemToAdd).subscribe({
+            next: () => {
+              this.getUserCart()
+              this.addedToCart = true;
+              setTimeout(() => {
+                this.addedToCart = false
+              }, 1500);
+            },
+            error: (err) => console.error("Error adding to cart:", err)
+          });
+        } else {
+          this.https.getProductQuantitiy(itemToAdd).subscribe({
+            next: (data: any) => {
+              console.log(data)
+              this.addedToCart = true;
+              setTimeout(() => {
+                this.addedToCart = false
+              }, 1500);
+            },
+            error: (err) => console.error("Error getting quantity:", err)
+          });
+        }
+      },
+      error: (err) => {
+        console.error("Error getting user cart:", err);
+      }
+    });
   }
 
-  addToCart(productID : string){
+   @HostListener('window:keyup.arrowright', ['$event'])
 
-    if(this.cookies.get("userLogedIn")){
-
-      let itemToAdd = {
-        id: productID,
-        quantity: 1
-      }
+  handleArrowRight(event: KeyboardEvent) {
+    this.nextImage(this.productDetails.images);
+  }
   
-      if(this.userHasCart){
-        this.https.addToCartItem(itemToAdd).subscribe({
-          next: (data: any) => {
-            console.log(data);
-          },
-          error: (err) => {
-            console.error('Error:', err);
-          }
-        });
-      }
-      else {  
-        this.https.getProductQuantitiy(itemToAdd).subscribe({
-          next: (data: any) => {
-            console.log(data);
-          },
-          error: (err) => {
-            console.error('Error:', err);
-          }
-        })
-      }
-    }
-    else {
-      this.https.transferNoAccountToggle.next(true)
-    }
+  @HostListener('window:keyup.arrowleft', ['$event'])
+  
+  handleAroowLeft(event: KeyboardEvent){
+    this.prevImage(this.productDetails.images)
   }
 
   

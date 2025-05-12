@@ -41,6 +41,7 @@ export class AsideSectionComponent implements OnInit  {
   public isPriceErrorVisible = false;
 
   public filteredProducts: MainProductsObject = {} as MainProductsObject;
+  public pageIndex: number = 1;
   
 
 
@@ -130,6 +131,7 @@ getAllProducts(pageIndex : number, pageProductsSize: string ){
   this.https.getAllProducts(pageIndex, pageProductsSize).subscribe({
     next: (data:MainProductsObject) => {
       this.https.transferProductsAll.next(data)
+      this.https.transferPageIndex.next(pageIndex)
     },
     error: (error) => console.log(error)
   })

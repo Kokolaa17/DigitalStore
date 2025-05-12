@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { APIconnectionService } from '../apiconnection.service';
 import { Products } from '../products';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class CartPageComponent implements OnInit {
   public cartProducts: any;
   public totalPrice: string = ""
   public displayCart: Products[] = []
-  public producID : any;
+  public inCartNumber: number = 0
 
 
   getCartProducts(){
@@ -32,8 +33,8 @@ export class CartPageComponent implements OnInit {
       this.products = data;
       this.cartProducts = data.products;
       this.totalPrice = data.total.price.current     
-      this.https.transferCardProductsNumber.next(data.total.quantity)  
-      this.producID = data.products
+      this.inCartNumber = data.total.quantity
+      console.log(this.inCartNumber);
     }
     })
   }
@@ -55,9 +56,10 @@ export class CartPageComponent implements OnInit {
         this.products = data;
         this.cartProducts = data.products;
         this.totalPrice = data.total.price.current      
-        this.https.transferCardProductsNumber.next(data.total.quantity) 
+        this.inCartNumber = data.total.quantity
       }
     })
+    console.log(this.inCartNumber);
   }
 
   increaseQuantity(productID : string, quantity : number){
@@ -76,20 +78,34 @@ export class CartPageComponent implements OnInit {
       next: (data: any) => {
         this.products = data;
         this.cartProducts = data.products;
-        this.totalPrice = data.total.price.current      
-        this.https.transferCardProductsNumber.next(data.total.quantity) 
-        console.log(data);
-        
+        this.totalPrice = data.total.price.current     
+        this.inCartNumber = data.total.quantity       
       }
     })
+    console.log(this.inCartNumber);
   }
 
   deleteFromCart(productID : string){
-    let deleteThisProduct = {
+    console.log(productID)
+
+    const deleteThisProduct = {
       id: productID
     }
+  
+    this.https.deleteFromCart(deleteThisProduct).subscribe({
+      next: (data : any) => {
+         this.products = data;
+        this.cartProducts = data.products;
+        this.totalPrice = data.total.price.current 
+        this.inCartNumber = data.total.quantity    
+      },
+      error: (data: any) => ''
+    })
+    console.log(this.inCartNumber);
+  }
 
-    this.https.deleteFromCart(deleteThisProduct).subscribe((data : any ) => console.log(data))
+  deleteCart(){
+    this.https.deleteCart().subscribe((data : any) => console.log(data))
   }
 
 

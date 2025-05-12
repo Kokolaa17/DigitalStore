@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, SimpleChanges, ViewChild,} from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { APIconnectionService } from '../apiconnection.service';
 import { FormsModule } from '@angular/forms';
 import { MainProductsObject } from '../main-products-object';
@@ -17,7 +17,7 @@ import { NoAccountComponent } from "../no-account/no-account.component";
 })
 export class NavigationBarComponent implements OnInit{
   
-  constructor(private https: APIconnectionService, public cookies : CookieService){
+  constructor(private https: APIconnectionService, public cookies : CookieService, public router : Router){
 
   }
 
@@ -26,7 +26,14 @@ export class NavigationBarComponent implements OnInit{
     this.closeSignUp()
     this.closeSignIn()
     this.getNoAccount()
-    this.getProductsInCart()
+    this.loaderLogic()
+    const interval = setInterval(() => {
+      if (this.cookies.check('userLogedIn')) {
+        clearInterval(interval);
+        this.getUser();
+      }
+    }, 1);
+    
   }
 
   public searchWord: string = "";
@@ -37,7 +44,10 @@ export class NavigationBarComponent implements OnInit{
   public isSignUpOpen: boolean = false;
   public isSignInOpen: boolean = false;
   public isNoAccountOpen: boolean = false;
-  public productsInCart : number = 0;
+  public userFirstaName : string = ""
+  public avatar : string = ""
+  public getCartNumber : number = 0;
+  public loading: boolean = false;
   @ViewChild("searchBar") public search! : ElementRef;
   @ViewChild("searchResault") public searchResault! : ElementRef;
   @ViewChild('pageIndicators') public pageIndicators!: ElementRef;
@@ -113,6 +123,7 @@ export class NavigationBarComponent implements OnInit{
 
   logOut(){
     this.cookies.delete("userLogedIn")
+    this.router.navigate(["/"])
   }
 
 
@@ -120,8 +131,20 @@ export class NavigationBarComponent implements OnInit{
     this.https.transferNoAccountToggle.subscribe((data : boolean) => this.isNoAccountOpen = data)
   }
 
-  getProductsInCart(){
-    this.https.transferCardProductsNumber.subscribe((data: number) => this.productsInCart = data)
+  getUser(){
+      this.https.getUserPage().subscribe({
+      next: (data:any) => {
+        this.userFirstaName = data.firstName
+        this.avatar = data.avatar
+      } 
+    })
   }
 
+  
+
+  loaderLogic() {
+    this.https.loaderLogic.subscribe( (data:boolean) => {
+      this.loading = data
+    } )
+  }
 }

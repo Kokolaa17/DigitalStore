@@ -1,0 +1,31 @@
+section {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-backdrop-filter: blur(10px) brightness(50%);
+    backdrop-filter: blur(10px) brightness(50%);
+    z-index: 10;
+    transition: 0.3s;
+    .notify {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        p {
+            color: #fff;
+            font-size: 20px;
+         }
+        i {
+            margin-top: 30px;
+            color: #fff;
+            font-size: 100px;
+            animation: fromBack 0.5s;
+        }
+    }
+}

@@ -196,10 +196,7 @@
                     color: #000;
                     &:hover {
                         transition: 0.3s;
-                        background-color: #fff;
-                    }
-                    &:active {
-                        background-color: #000;
+                        background-color: #010101a3;
                         color: #fff;
                     }
                 }
@@ -240,7 +237,12 @@
         }
     }
 }
-
+.activePage {
+  box-shadow: 0px 0px 15px #010101;
+  background-color: #010101;
+  color: #fff !important;
+  pointer-events: none;
+}
 @media screen and (max-width: 800px) {
     .order-page-container {
         flex-direction: column;

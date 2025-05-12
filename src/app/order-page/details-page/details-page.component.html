@@ -1,6 +1,6 @@
 <section class="details">
     <div class="left-image">
-        <h5 [style.display]="productDetails.price.discountPercentage <= 0 ? 'none' : 'block' ">{{productDetails.price.discountPercentage}}%</h5>
+             <h5 [style.display]="productDetails.price.discountPercentage <= 0 ? 'none' : 'block' ">{{productDetails.price.discountPercentage}}%</h5>
             <button (click)="prevImage(productDetails.images)" class="prevBtn"><i class="fa-solid fa-arrow-left"></i></button>
             <img [src]="productDetails.images[slideIndex]" alt="{{productDetails.title}}">
             <button (click)="nextImage(productDetails.images)" class="nextBtn"><i class="fa-solid fa-arrow-right"></i></button>
@@ -49,3 +49,8 @@
         </article>
     </div>
 </section>
+
+@if (addedToCart) {
+    <app-add-to-cart-notify></app-add-to-cart-notify>
+}
+

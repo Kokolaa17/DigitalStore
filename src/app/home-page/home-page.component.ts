@@ -16,7 +16,12 @@ export class HomePageComponent implements OnInit {
 Math: any;
 
   constructor(private https: APIconnectionService, private cookies : CookieService){
-    this.getUserCart()
+    const interval = setInterval(() => {
+      if (this.cookies.check('userLogedIn')) {
+        clearInterval(interval);
+        this.getUserCart()
+      }
+    }, 1);
   }
   
   ngOnInit(): void {
@@ -56,9 +61,8 @@ Math: any;
   }
 
   getUserCart(){
-    this.https.getUserPage().subscribe({
+      this.https.getUserPage().subscribe({
       next: (data : any) => this.userHasCart = data.cartID,
-      error: (data : any) => console.log(data)
     })
   }
 

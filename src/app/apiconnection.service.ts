@@ -25,7 +25,16 @@ export class APIconnectionService {
   public transferSignUpToggle: Subject<boolean> = new Subject;
   public transferLogInToggle: Subject<boolean> = new Subject;
   public transferNoAccountToggle: Subject<boolean> = new Subject;
-  public transferCardProductsNumber: BehaviorSubject<number> = new BehaviorSubject(0);
+  public transferPageIndex: BehaviorSubject<number> = new BehaviorSubject(1);
+  public loaderLogic: BehaviorSubject<boolean> = new BehaviorSubject(false)
+
+  startLoading() {
+    this.loaderLogic.next(true)
+  }
+
+  stopLoading() {
+    this.loaderLogic.next(false)
+  }
 
   
   getBestSellers(){
@@ -97,6 +106,10 @@ export class APIconnectionService {
   }
 
   deleteFromCart(body : any){
-    return this.Http.delete("https://api.everrest.educata.dev/shop/cart/product", body)
+    return this.Http.delete("https://api.everrest.educata.dev/shop/cart/product", {body: body})
+  }
+
+  deleteCart(){
+    return this.Http.delete("https://api.everrest.educata.dev/shop/cart")
   }
 }

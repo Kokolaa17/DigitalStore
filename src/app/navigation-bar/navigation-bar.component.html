@@ -3,7 +3,7 @@
         <h5>FREE SHIPPING WORLDWIDE</h5>
     </div>
     <div class="navigation">
-        <h1 routerLink="/">Digital<span>Store</span></h1>
+        <h1 routerLink="/">Digital<p>Store<p><span [style.display]="loading ? 'block' : 'none'" class="loader"></span></h1>
 
         <div class="search">
             <input #searchBar type="text" placeholder="Search..." [(ngModel)]="searchWord" (keyup)="searchProduct(searchWord)" (keyup.enter)="displaySearchedProductsDown()"  (focus)="searchAppear()" (input)="searchProduct(searchWord); searchAppear()" (blur)="hideResultsWithDelay()">
@@ -44,8 +44,8 @@
         @else {
             <div class="logedin-menu">
                 <ul>
-                    <li routerLink="userProfile">User</li>
-                    <li routerLink="cart">Cart <i class="fa-solid fa-cart-shopping"></i> <span>{{productsInCart}}</span></li>
+                    <li routerLink="userProfile" class="userProfile">{{userFirstaName}} <img [src]="avatar" alt="{{userFirstaName}} image"></li>
+                    <li routerLink="cart">Cart <i class="fa-solid fa-cart-shopping"></i> <span>{{getCartNumber}}</span></li>
                     <li (click)="logOut()">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
                     <div #burgerBar class="burgerBarD">
                         @if (!isMenuOpen) {
@@ -77,8 +77,8 @@
                 <li class="mobile-menu" (click)="openSignUp()">Sign up <i class="fa-regular fa-id-card"></i></li>
             }
             @else {
-                <li class="mobile-menu" routerLink="userProfile">User</li>
-                <li class="mobile-menu" routerLink="cart">Cart <i class="fa-solid fa-cart-shopping"></i> <span></span></li>
+                <li class="mobile-menu" routerLink="userProfile" routerLinkActive="activeLink" (click)="closeMenu()" class="userProfile">{{userFirstaName}} <img [src]="avatar" alt="{{userFirstaName}} image"></li>
+                <li class="mobile-menu" routerLink="cart" routerLinkActive="activeLink" (click)="closeMenu()">Cart <i class="fa-solid fa-cart-shopping"></i> <span></span></li>
                 <li class="mobile-menu" (click)="logOut()">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
             }
         </ul>

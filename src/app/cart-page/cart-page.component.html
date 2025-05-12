@@ -18,7 +18,7 @@
                 </div>
             </td>
             <td>
-                <button (click)="deleteFromCart(products.productId)" class="remove-button">Remove <i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                <button (click)="deleteFromCart(product.productId)" class="remove-button">Remove <i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
             </td>
         </tr>
     }
@@ -26,6 +26,7 @@
     <div class="cart-actions">
         <div class="total-price">
             <p>Total Price: {{totalPrice}}$</p> 
+            <button (click)="deleteCart()">Delete Cart <i class="fa-solid fa-cart-shopping"></i></button>
         </div>
        <div class="check-out">
             <button (click)="checkOutProducts()"><i class="fa-solid fa-credit-card"></i> Check out</button>
