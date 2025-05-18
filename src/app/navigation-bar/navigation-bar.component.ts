@@ -27,13 +27,18 @@ export class NavigationBarComponent implements OnInit{
     this.closeSignIn()
     this.getNoAccount()
     this.loaderLogic()
-    const interval = setInterval(() => {
-      if (this.cookies.check('userLogedIn')) {
-        clearInterval(interval);
+    let wasLoggedIn = false;
+
+    setInterval(() => {
+
+      const isNowLoggedIn = this.cookies.check("userLogedIn");
+
+      if (isNowLoggedIn && !wasLoggedIn) {
         this.getUser();
       }
-    }, 1);
-    this.getInCartNumber()
+
+      wasLoggedIn = isNowLoggedIn;
+    }, 1000);
   }
 
   public searchWord: string = "";

@@ -70,7 +70,7 @@
                     
                 </div>
             </div>
-            <button [style.backgroundColor]="createAccount.invalid ? '#010101ad' : '#010101'" [disabled]="createAccount.invalid" class="submitButton" type="submit">Register</button>
+            <button [style.backgroundColor]="createAccount.invalid ? '#rgba(84, 44, 19, 0.384)' : '#010101'" [disabled]="createAccount.invalid" class="submitButton" type="submit">Register</button>
             @if (isRegistered == false) {
                 <ul [style.display]="showErrors ? 'flex' : 'none'">
                     @for (error of badRequestKeys; track $index) {
