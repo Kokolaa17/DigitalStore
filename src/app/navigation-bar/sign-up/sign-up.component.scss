@@ -185,8 +185,9 @@ input.ng-invalid.ng-dirty {
 
 @media (max-width: 1080px){
     .account-creation {
-        width: 90% !important;
-        height: 80% !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: none;
         ul {
             display: none;
         }
