@@ -13,12 +13,13 @@
                 <div class="card">
                     <div class="image-container">
                       <img routerLink="/orderPage/detailsPage/{{product._id}}" [src]="product.thumbnail" alt="Modern Laptop">
-                </div>
-                    <h5 [style.backgroundColor]="product.stock <= 0 ? 'red' : 'green'">{{product.stock <= 0 ? "Not in stock" : `In stock: ${product.stock}`}}</h5>
+                    </div>
+                    <h5 [style.display]="product.stock <= 0 ? 'block' : 'none'">Out of Stock</h5>
+                    <h4 [style.display]="product.stock > 0 ? 'block' : 'none'">In Stock : {{product.stock}}</h4>
                    <div class="content">
                         <article>
                             <p>{{product.price.current}}$<span>{{product.price.beforeDiscount == product.price.current ? "": `${product.price.beforeDiscount}$`}}</span></p>
-                            <h2>{{product.title}}</h2>
+                            <h2 routerLink="/orderPage/detailsPage/{{product._id}}">{{product.title}}</h2>
                             <div class="stars">
                                 @for (item of Array(math.round(product.rating)); track $index) {
                                     <i class="fa-solid fa-star"></i>

@@ -117,7 +117,6 @@
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
         animation: fromBack 1s;
-        cursor: pointer;
         transition: 0.3s;
         &:hover { 
            transform: translateY(-5px);
@@ -145,11 +144,22 @@
         }
         h5 {
             position: absolute;
+            transform: rotate(-39deg);
+            background-color: red;
+            padding: 5px 20px;
+            left: -24px;
+            top: 16px;
+            z-index: 3;
+            font-family: "Roboto Flex", sans-serif;
+        }
+        h4 {
+            position: absolute;
             top: 258px;
             left: 0px;
             padding: 3px 6px;
             color: #fff;
             border-top-right-radius: 12px;
+            background-color: green;
         }
         .content {
             padding: 20px;
@@ -159,6 +169,7 @@
                 color: #1d1d1f;
                 margin-bottom: 12px;
                 font-family: "Roboto", sans-serif;
+                cursor: pointer;
             }
             .stars {
                 display: flex;

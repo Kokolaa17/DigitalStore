@@ -34,6 +34,7 @@ aside {
             justify-content: flex-end;
             gap: 15px;
             display: none;
+            overflow: hidden;
             button {
                 height: 40px;
                 width: 100px;
@@ -73,6 +74,7 @@ aside {
             display: none;
             flex-direction: column;
             gap: 10px;
+            overflow: hidden;
             li {
                 display: flex;
                 align-items: center;
@@ -105,6 +107,7 @@ aside {
             flex-direction: column;
             gap: 15px;
             display: none;
+            overflow: hidden;
             .star {
                 font-size: 18px;
                 font-family: "Roboto", sans-serif;
@@ -133,6 +136,7 @@ aside {
         display: flex;
         flex-direction: column;
         display: none;
+        overflow: hidden;
         .price-inputs {
             display: flex;
             gap: 30px;

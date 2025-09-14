@@ -15,7 +15,7 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <div #searchResault (mousedown)="cancelBlurHide = true" (mouseup)="cancelBlurHide = false" class="searched-products">
                 @for (product of displaySearchedProducts; track $index) {
-                    <div class="product">
+                    <div class="product" routerLink="/orderPage/detailsPage/{{product._id}}">
                         <img [src]="product.thumbnail" alt="{{product.title}}">
                         <div class="price-title">
                             <h2>{{product.title}}</h2>

@@ -70,6 +70,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   selectPage(page: number) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.currentPage = page;
     this.getAllProducts(page, this.pageProductsSize);
   }

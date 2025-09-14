@@ -67,10 +67,15 @@ export class AsideSectionComponent implements OnInit  {
         const isOpen = categories.icon.nativeElement.textContent === '+';
         categories.icon.nativeElement.textContent = isOpen ? '-' : '+';
         categories.element.nativeElement.style.display = isOpen ? 'flex' : 'none';
-
+        Array.from(categories.element.nativeElement.children).forEach((child) => {
+          (child as HTMLElement).style.animation = 'fromTop 0.3s ease';
+        });
       } else {
         categories.icon.nativeElement.textContent = '+';
         categories.element.nativeElement.style.display = 'none';
+        Array.from(categories.element.nativeElement.children).forEach((child) => {
+          (child as HTMLElement).style.animation = 'fromBottom 0.3s ease';
+        });
       }
     });
 
