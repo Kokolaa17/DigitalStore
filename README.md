@@ -1,59 +1,43 @@
-# DigitalStore
+<h1>🛍️ DigitalStore - Online Shopping Platform</h1>
+A fully functional e-commerce application built with Angular 19 and real API integration. Users can browse products, manage their cart, and complete purchases with a modern, responsive design.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+<h2>📸 Screenshots</h2>
 
-## Development server
+<img width="1897" height="908" alt="image" src="https://github.com/user-attachments/assets/c87f2aa2-05df-4e56-b05a-90c2cf003802" />
 
-To start a local development server, run:
+<img width="1898" height="908" alt="image" src="https://github.com/user-attachments/assets/c2e66f01-9b95-4abd-ade7-d25e5cbe89a5" />
 
-```bash
-ng serve
-```
+<h2>✨ Features</h2>
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+<ul>
+  <li>User registration and authentication</li>
+  <li>Shopping cart functionality</li>
+  <li>Fully responsive design</li>
+  <li>Product search and filtering</li>
+</ul>
 
-## Code scaffolding
+<h2>🛠️ Technologies Used</h2>
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+<ul>
+  <li>Frontend: Angular 19, TypeScript</li>
+  <li>Styling: SCSS</li>
+  <li>API : REST API integration</li>
+  <li>Deployment: Vercel</li>
+  <li>Version Control: Git & GitHub</li>
+</ul>
 
-```bash
-ng generate component component-name
-```
+<h2>🎯 Through this project, I practiced:</h2>
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+<ul>
+  <li>Modern Angular development (v19)</li>
+  <li>Component-based architecture</li>
+  <li>API integration and HTTP services</li>
+  <li>Responsive web design</li>
+  
+</ul>
 
-```bash
-ng generate --help
-```
+<h2>📧 Contact</h2>
 
-## Building
+LinkedIn: [Giorgi Kokolashvili](https://www.linkedin.com/in/giorgi-kokolashvili-772801354/)
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Email: g.kokolashvili017@gmail.com
