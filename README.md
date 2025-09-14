@@ -44,6 +44,3 @@ A fully functional e-commerce application built with Angular 19 and real API int
 LinkedIn: [Giorgi Kokolashvili](https://www.linkedin.com/in/giorgi-kokolashvili-772801354/)
 
 Email: g.kokolashvili017@gmail.com
-
-
-⭐ If you found this project helpful, please give it a star!
