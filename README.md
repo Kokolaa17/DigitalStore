@@ -1,5 +1,5 @@
 <h1>🛍️ DigitalStore - Online Shopping Platform</h1>
-A fully functional e-commerce application built with Angular 19 and real API integration. Users can browse products, manage their cart, and complete purchases with a modern, responsive design.
+A fully functional responsive e-commerce application built with Angular 19 and real API integration. Users can browse products, manage their cart, register account.
 
 <h2>📸 Screenshots</h2>
 
@@ -16,6 +16,7 @@ A fully functional e-commerce application built with Angular 19 and real API int
   <li>Shopping cart functionality</li>
   <li>Fully responsive design</li>
   <li>Product search and filtering</li>
+  <li>User page</li>
 </ul>
 
 <h2>🛠️ Technologies Used</h2>
@@ -30,8 +31,8 @@ A fully functional e-commerce application built with Angular 19 and real API int
 
 <h2>🚀 Future Plans</h2>
 <ul>
+  <li>Add responsive design<li>
   <li>Improve user page interface and functionality</li>
-  <li>Improve product details page</li>
 </ul>
 
 <h2>🎯 Through this project, I practiced:</h2>
