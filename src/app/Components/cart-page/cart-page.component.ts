@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { APIconnectionService } from '../apiconnection.service';
-import { Products } from '../products';
+import { APIconnectionService } from '../../Services/apiconnection.service';
+import { Products } from '../../Interfaces/products';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 

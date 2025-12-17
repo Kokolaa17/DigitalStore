@@ -1,10 +1,10 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Products } from '../../products';
-import { APIconnectionService } from '../../apiconnection.service';
+import { Products } from '../../../Interfaces/products';
+import { APIconnectionService } from '../../../Services/apiconnection.service';
 import { CookieService } from 'ngx-cookie-service';
-import { UserInfo } from '../../user-info';
-import { AddToCartNotifyComponent } from "../../add-to-cart-notify/add-to-cart-notify.component";
+import { UserInfo } from '../../../Interfaces/user-info';
+import { AddToCartNotifyComponent } from '../../add-to-cart-notify/add-to-cart-notify.component';
 
 
 @Component({
@@ -15,9 +15,9 @@ import { AddToCartNotifyComponent } from "../../add-to-cart-notify/add-to-cart-n
 })
 export class DetailsPageComponent implements OnInit {
 
-  constructor(private https: APIconnectionService, public activeR: ActivatedRoute, private cookies : CookieService){
-
-  }
+  private readonly _http : APIconnectionService = inject(APIconnectionService);
+  private readonly _activeR : ActivatedRoute = inject(ActivatedRoute);
+  _cookies : CookieService = inject(CookieService);
   
   ngOnInit(): void {
     this.getID()
@@ -34,42 +34,26 @@ export class DetailsPageComponent implements OnInit {
   math = Math;
 
   getID(){
-    this.activeR.params.subscribe((data:any) => this.productID = data.productID)
+    this._activeR.params.subscribe((data:any) => this.productID = data.productID)
   }
   
   getProductDetails(){
-    this.https.goToDetailsPage(this.productID).subscribe({
-      next: ((data: Products) => this.productDetails = data)
-    })
-  }
-
-  nextImage(images: any){
-    this.slideIndex++
-    if(this.slideIndex > images.length - 1){
-      this.slideIndex = 0;
-    }
-  }
-
-  prevImage(images: any) {
-    this.slideIndex--;
-    if (this.slideIndex < 0) { 
-      this.slideIndex = images.length - 1;
-    }
+    this.productDetails = this._activeR.snapshot.data['productDetails']
   }
 
   getUserCart(){
-      this.https.getUserPage().subscribe({
+      this._http.getUserPage().subscribe({
           next: (data : UserInfo) => this.userHasCart = data.cartID
         })
     }
   
   addToCart(productID: string) {
-    if (!this.cookies.get("userLogedIn")) {
-      this.https.transferNoAccountToggle.next(true);
+    if (!this._cookies.get("userLogedIn")) {
+      this._http.transferNoAccountToggle.next(true);
       return;
     }
 
-    this.https.getUserPage().subscribe({
+    this._http.getUserPage().subscribe({
       next: (data: UserInfo) => {
         this.userHasCart = data.cartID;
 
@@ -79,7 +63,7 @@ export class DetailsPageComponent implements OnInit {
         };
 
         if (this.userHasCart === "") {
-          this.https.addToCartItem(itemToAdd).subscribe({
+          this._http.addToCartItem(itemToAdd).subscribe({
             next: () => {
               this.getUserCart()
               this.addedToCart = true;
@@ -90,10 +74,10 @@ export class DetailsPageComponent implements OnInit {
             error: (err) => console.error("Error adding to cart:", err)
           });
         } else {
-          this.https.getProductQuantitiy(itemToAdd).subscribe({
+          this._http.getProductQuantitiy(itemToAdd).subscribe({
             next: (data: any) => {
               this.addedToCart = true;
-              this.https.transferInCartNumber.next(data.total.quantity)
+              this._http.transferInCartNumber.next(data.total.quantity)
               setTimeout(() => {
                 this.addedToCart = false
               }, 1500);
@@ -108,17 +92,32 @@ export class DetailsPageComponent implements OnInit {
     });
   }
 
-   @HostListener('window:keyup.arrowright', ['$event'])
+    nextImage(){
+    if (!this.productDetails?.images || this.productDetails.images.length === 0) return;
+    
+    this.slideIndex++;
+    if(this.slideIndex > this.productDetails.images.length - 1){
+      this.slideIndex = 0;
+    }
+  }
 
+  prevImage() {
+    if (!this.productDetails?.images || this.productDetails.images.length === 0) return;
+    
+    this.slideIndex--;
+    if (this.slideIndex < 0) { 
+      this.slideIndex = this.productDetails.images.length - 1;
+    }
+  }
+
+  @HostListener('window:keyup.arrowright')
   handleArrowRight(event: KeyboardEvent) {
-    this.nextImage(this.productDetails.images);
-  }
-  
-  @HostListener('window:keyup.arrowleft', ['$event'])
-  
-  handleAroowLeft(event: KeyboardEvent){
-    this.prevImage(this.productDetails.images)
+    this.nextImage();
   }
 
-  
+  @HostListener('window:keyup.arrowleft')
+  handleArrowLeft(event: KeyboardEvent) {
+    this.prevImage();
+  }
+
 }

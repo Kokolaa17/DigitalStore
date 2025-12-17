@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable } from '@angular/core';
-import { MainProductsObject } from './main-products-object';
+import { MainProductsObject } from '../Interfaces/main-products-object';
 import { BehaviorSubject, Subject} from 'rxjs';
-import { Products } from './products';
-import { Categorys } from './categorys';
-import { RegisterForm } from './register-form';
-import { LoginForm } from './login-form';
-import { UserInfo } from './user-info';
+import { Products } from '../Interfaces/products';
+import { Categorys } from '../Interfaces/categorys';
+import { RegisterForm } from '../Interfaces/register-form';
+import { LoginForm } from '../Interfaces/login-form';
+import { UserInfo } from '../Interfaces/user-info';
 
 
 @Injectable({

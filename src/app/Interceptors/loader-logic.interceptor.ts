@@ -1,5 +1,5 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { APIconnectionService } from './apiconnection.service';
+import { APIconnectionService } from '../Services/apiconnection.service';
 import { finalize } from 'rxjs';
 import { inject } from '@angular/core';
 

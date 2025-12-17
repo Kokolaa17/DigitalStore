@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { APIconnectionService } from '../apiconnection.service';
-import { UserInfo } from '../user-info';
+import { APIconnectionService } from '../../Services/apiconnection.service';
+import { UserInfo } from '../../Interfaces/user-info';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({

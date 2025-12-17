@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { APIconnectionService } from '../../apiconnection.service';
+import { APIconnectionService } from '../../../Services/apiconnection.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 

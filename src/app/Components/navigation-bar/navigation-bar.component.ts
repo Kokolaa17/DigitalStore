@@ -1,13 +1,13 @@
 import { Component, ElementRef, OnInit, SimpleChanges, ViewChild,} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { APIconnectionService } from '../apiconnection.service';
+import { APIconnectionService } from '../../Services/apiconnection.service';
 import { FormsModule } from '@angular/forms';
-import { MainProductsObject } from '../main-products-object';
-import { Products } from '../products';
+import { MainProductsObject } from '../../Interfaces/main-products-object';
+import { Products } from '../../Interfaces/products';
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { SignInComponent } from './sign-in/sign-in.component';
 import { CookieService } from 'ngx-cookie-service';
-import { NoAccountComponent } from "../no-account/no-account.component";
+import { NoAccountComponent } from '../no-account/no-account.component';
 
 @Component({
   selector: 'app-navigation-bar',

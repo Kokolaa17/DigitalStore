@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { APIconnectionService } from '../../apiconnection.service';
-import { Categorys } from '../../categorys';
-import { MainProductsObject } from '../../main-products-object';
+import { APIconnectionService } from '../../../Services/apiconnection.service';
+import { Categorys } from '../../../Interfaces/categorys';
+import { MainProductsObject } from '../../../Interfaces/main-products-object';
 import { FormsModule } from '@angular/forms';
 
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { APIconnectionService } from '../apiconnection.service';
+import { APIconnectionService } from '../../Services/apiconnection.service';
 import { HomePageChildComponent } from "./home-page-child/home-page-child.component";
 import { RouterModule } from '@angular/router';
-import { Products } from '../products';
+import { Products } from '../../Interfaces/products';
 import { CookieService } from 'ngx-cookie-service';
 
 

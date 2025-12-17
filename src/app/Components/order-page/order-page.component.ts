@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild,} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild,} from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { APIconnectionService } from '../apiconnection.service';
-import { Products } from '../products';
-import { MainProductsObject } from '../main-products-object';
+import { APIconnectionService } from '../../Services/apiconnection.service';
+import { Products } from '../../Interfaces/products';
+import { MainProductsObject } from '../../Interfaces/main-products-object';
 import { FormsModule } from '@angular/forms';
-import { AsideSectionComponent } from './aside-section/aside-section.component';
 import { CookieService } from 'ngx-cookie-service';
-import { UserInfo } from '../user-info';
-import { AddToCartNotifyComponent } from "../add-to-cart-notify/add-to-cart-notify.component";
+import { UserInfo } from '../../Interfaces/user-info';
+import { AddToCartNotifyComponent } from '../add-to-cart-notify/add-to-cart-notify.component';
+import { AsideSectionComponent } from './aside-section/aside-section.component';
 
 
 @Component({
@@ -17,9 +17,9 @@ import { AddToCartNotifyComponent } from "../add-to-cart-notify/add-to-cart-noti
   styleUrl: './order-page.component.scss'
 })
 export class OrderPageComponent implements OnInit, AfterViewInit {
-  constructor(private https: APIconnectionService, private cookies : CookieService){
-    
-  }
+
+  private readonly _http : APIconnectionService = inject(APIconnectionService);
+  _cookies : CookieService = inject(CookieService);
   
   ngOnInit(): void {
     this.getAllProducts(1, this.pageProductsSize)
@@ -49,7 +49,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
 
   getAllProducts(pageIndex : number, pageProductsSize: string ){
-    this.https.getAllProducts(pageIndex, pageProductsSize).subscribe({
+    this._http.getAllProducts(pageIndex, pageProductsSize).subscribe({
       next: (data:MainProductsObject) => {
         this.displayProducts = data.products
         this.totalProducts = data.total
@@ -76,7 +76,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   displaySearchedProducts(){
-    this.https.searchedProductsTransfer.subscribe({
+    this._http.searchedProductsTransfer.subscribe({
       next: (data:MainProductsObject) => {
         this.displayProducts = data.products
         this.totalProducts = data.total
@@ -95,11 +95,11 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   transferPageIndicators(){
-    this.https.pageIndicatorsTransfer.next(this.pageIndicators)
+    this._http.pageIndicatorsTransfer.next(this.pageIndicators)
   }
   
   transferFilteredProducts(){
-   this.https.transferProductsFromFilter.subscribe({
+   this._http.transferProductsFromFilter.subscribe({
     next: (data : MainProductsObject) => {
       this.displayProducts = data.products
       this.totalProducts = data.total
@@ -111,7 +111,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   transferProductsAll(){
-    this.https.transferProductsAll.subscribe({
+    this._http.transferProductsAll.subscribe({
       next: (data:MainProductsObject) => {
         this.displayProducts = data.products
         this.totalProducts = data.total
@@ -132,18 +132,18 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   getUserCart(){
-    this.https.getUserPage().subscribe({
+    this._http.getUserPage().subscribe({
         next: (data : UserInfo) => this.userHasCart = data.cartID
       })
   }
 
   addToCart(productID: string) {
-    if (!this.cookies.get("userLogedIn")) {
-      this.https.transferNoAccountToggle.next(true);
+    if (!this._cookies.get("userLogedIn")) {
+      this._http.transferNoAccountToggle.next(true);
       return;
     }
 
-    this.https.getUserPage().subscribe({
+    this._http.getUserPage().subscribe({
       next: (data: UserInfo) => {
         this.userHasCart = data.cartID;
 
@@ -153,7 +153,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         };
 
         if (this.userHasCart === "") {
-          this.https.addToCartItem(itemToAdd).subscribe({
+          this._http.addToCartItem(itemToAdd).subscribe({
             next: () => {
               this.getUserCart()
               this.addedToCart = true;
@@ -164,10 +164,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
             error: (err) => console.error("Error adding to cart:", err)
           });
         } else {
-          this.https.getProductQuantitiy(itemToAdd).subscribe({
+          this._http.getProductQuantitiy(itemToAdd).subscribe({
             next: (data: any) => {
               this.addedToCart = true;
-              this.https.transferInCartNumber.next(data.total.quantity)
+              this._http.transferInCartNumber.next(data.total.quantity)
               setTimeout(() => {
                 this.addedToCart = false
               }, 1500);
@@ -183,6 +183,6 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   getPageIndex(){
-    this.https.transferPageIndex.subscribe((data : number) => this.currentPage = data)
+    this._http.transferPageIndex.subscribe((data : number) => this.currentPage = data)
   }
 }

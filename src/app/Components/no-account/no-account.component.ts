@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { APIconnectionService } from '../apiconnection.service';
+import { APIconnectionService } from '../../Services/apiconnection.service';
 
 @Component({
   selector: 'app-no-account',
